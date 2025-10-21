@@ -1,0 +1,184 @@
+---
+title: Technical Architecture Overview
+description: Modular design philosophy and hybrid data flows powering FolioChain Protocol
+---
+
+import { Aside, Card, CardGrid } from '@astrojs/starlight/components';
+
+The FolioChain Protocol's technical architecture is a symphony of modular precision, orchestrated to harmonize the deterministic rigor of blockchain with the interpretive nuance of off-chain intelligence. At its core, FCP is neither monolithic nor static; it is a living, layered framework—each module a distinct instrument, each data flow a carefully charted passage—engineered to adapt, audit, and enforce within the shifting contours of Costa Rican law and market practice.
+
+## Hybrid Design Philosophy
+
+<Aside type="note">
+FCP's architecture is deliberately hybrid, bifurcating responsibilities between on-chain smart contracts and off-chain components where AI-powered oracles, legal actors, and compliance services interpret and validate real-world events.
+</Aside>
+
+This duality is not a compromise but a necessity: it ensures that every tokenized asset, every transaction, and every compliance check is grounded both in cryptographic certainty and in the evolving realities of Costa Rican property law, registry practice, and regulatory oversight.
+
+### Why Hybrid Architecture?
+
+The hybrid approach addresses fundamental challenges in Costa Rica's real estate ecosystem:
+
+- **Analog Registry Systems**: No public APIs exist for the National Registry
+- **Human-Centric Legal Processes**: Notaries remain essential for legal enforceability  
+- **Regulatory Evolution**: Laws like Bill 23.415 require adaptable compliance mechanisms
+- **Multi-Source Verification**: Truth emerges from consensus across fragmented data sources
+
+## Modular Structure: Core Components
+
+The protocol's modularity enables both granular responsibility assignment and seamless interoperability across all system components.
+
+<CardGrid stagger>
+  <Card title="On-Chain Modules" icon="rocket">
+    Smart contracts providing deterministic logic, transparent execution, and immutable record-keeping
+  </Card>
+  <Card title="Off-Chain Intelligence" icon="laptop">
+    AI-powered oracles, compliance services, and user interfaces bridging digital and legal worlds
+  </Card>
+  <Card title="Integration Layer" icon="puzzle">
+    Data flows and attestation mechanisms ensuring consistency between on-chain and off-chain states
+  </Card>
+</CardGrid>
+
+### On-Chain Modules
+
+The blockchain layer provides cryptographic certainty and programmable enforcement:
+
+- **Identity Registry**: Custodian of user identities and compliance claims, extended for Costa Rican legal attributes
+- **Compliance Engine**: Programmable heart of regulatory enforcement, dynamically applying KYC/AML, ownership caps, and folio real mapping
+- **Asset Token Contracts**: Digital embodiment of real-world assets using ERC-721 (master) and ERC-1155 (fractional) tokens
+- **Yield Distribution Module**: Automates pro-rata income allocation and statutory tax withholding
+- **Escrow and Settlement**: Mediates transactional finality with notarial attestation requirements
+- **Governance and Upgrade**: DAO-driven, UUPS proxy-enabled protocol evolution
+- **Event Logging**: Granular, timestamped audit trails for regulatory compliance
+
+### Off-Chain Modules
+
+The off-chain layer provides intelligence, interpretation, and integration with legacy systems:
+
+- **Oracle Layer**: Ensemble of AI-powered and multi-source oracles aggregating registry data, notarial attestations, and compliance statuses
+- **KYC/AML Verification**: Integration with compliance providers and regulators for cryptographic claim issuance
+- **National Registry Integration**: AI/ML-powered parsing of legal documents and anomaly detection
+- **Legal/Compliance Dashboard**: Real-time monitoring and automated regulatory reporting
+- **dApp Frontend/Backend**: User gateway orchestrating onboarding, investment, and yield management
+- **Decentralized Storage**: IPFS/Arweave integration for tamper-proof document retention
+
+## Data and Control Flows
+
+<Aside type="tip">
+FCP's data choreography ensures that every user action, regulatory check, and compliance verification maintains consistency between digital and legal realities.
+</Aside>
+
+### User Onboarding Flow
+
+1. **dApp Initiation**: User connects wallet and begins KYC process
+2. **Off-Chain Verification**: KYC/AML services validate identity documents
+3. **Cryptographic Claims**: Verified attributes issued as blockchain-anchored attestations
+4. **Registry Inscription**: Claims written to on-chain Identity Registry
+5. **Access Authorization**: Compliance engine grants protocol participation rights
+
+### Asset Tokenization Flow
+
+1. **Issuer Request**: Property owner or notary initiates tokenization via dApp
+2. **Oracle Verification**: AI systems parse registry data, legal documents, and notarial attestations
+3. **Multi-Source Consensus**: Oracle layer synthesizes and validates all data sources
+4. **Compliance Minting**: Smart contracts verify regulatory requirements before token creation
+5. **Asset Deployment**: ERC-721 master and ERC-1155 fractional tokens deployed with folio real mapping
+
+### Transaction Execution Flow
+
+1. **Transfer Initiation**: User attempts token transfer or yield claim
+2. **Real-Time Compliance**: Engine checks KYC status, ownership caps, and registry validity
+3. **Oracle Attestation**: Fresh verification of critical data points (folio real status, tax rates)
+4. **Automated Enforcement**: Smart contracts execute or reject based on compliance results
+5. **Event Emission**: All actions logged with timestamps and linked attestations
+
+## System Integration Patterns
+
+### Oracle-to-Contract Communication
+
+- **Cryptographic Anchoring**: Off-chain data hashed and stored on-chain for integrity verification
+- **Event-Driven Updates**: Registry changes trigger oracle notifications and contract state updates
+- **Consensus Mechanisms**: Multiple oracles must agree before critical status changes are accepted
+- **Dispute Resolution**: Disagreements automatically pause affected tokens and escalate to governance
+
+### Notary Integration Workflow
+
+- **Digital Credentialing**: Notaries onboarded with enhanced KYC and license verification
+- **Attestation Pipeline**: Signed documents uploaded, verified, and anchored on-chain
+- **Transaction Authorization**: Notarial approval required for escrows, transfers, and dispute resolution
+- **Legal Bridging**: Physical archives maintained alongside immutable digital records
+
+### Regulatory Reporting Automation
+
+- **Dashboard Generation**: Real-time compliance data aggregated for issuer and regulator access
+- **Automated Filing**: Periodic reports formatted and transmitted to relevant authorities
+- **Audit Trail Maintenance**: Complete transaction histories available for regulatory review
+- **Investigation Support**: Privileged access tools for compliance enforcement
+
+## Scalability and Performance Considerations
+
+### Blockchain Layer Optimization
+
+- **Polygon PoS Selection**: Low-cost, high-throughput blockchain for micro-investments
+- **Ethereum Bridge Readiness**: High-value assets can migrate to maximum security layer
+- **Layer 2 Integration**: Future compatibility with emerging scaling solutions
+
+### Off-Chain Efficiency
+
+- **Microservice Architecture**: Independent scaling of oracle, compliance, and user interface components
+- **Caching Strategies**: Frequently accessed registry and compliance data cached for performance
+- **Load Balancing**: Geographic distribution of services for global user access
+
+### Data Storage Strategy
+
+- **Hot vs. Cold Storage**: Active compliance data on-chain, archival documents on Arweave
+- **Content Addressing**: IPFS ensures document integrity without blockchain storage costs
+- **Compression and Optimization**: AI-processed data summarized for efficient on-chain storage
+
+## Security Architecture
+
+<Aside type="caution">
+Multi-layered security addresses both technical vulnerabilities and Costa Rica-specific legal risks.
+</Aside>
+
+### Smart Contract Security
+
+- **Formal Verification**: Mathematical proof of contract correctness
+- **Third-Party Audits**: Independent security reviews by established firms
+- **Upgrade Mechanisms**: UUPS proxies enable secure contract evolution
+- **Emergency Controls**: Pause functions for rapid incident response
+
+### Oracle Security
+
+- **Multi-Source Validation**: No single data source can compromise system integrity
+- **Cryptographic Signatures**: All notarial and regulatory attestations digitally signed
+- **Anomaly Detection**: AI models flag suspicious patterns for human review
+- **Redundancy Systems**: Backup oracles activate if primary sources fail
+
+### Access Control Security
+
+- **Role-Based Permissions**: Granular control over sensitive system functions
+- **Multi-Signature Requirements**: Critical operations require multiple authorized parties
+- **Time-Locked Operations**: Delays for major changes allow dispute resolution
+- **Audit Logging**: Complete access history for security forensics
+
+## Future-Proofing and Extensibility
+
+### Regulatory Adaptation
+
+- **Modular Compliance Hooks**: New legal requirements integrated without system disruption
+- **Upgradeable Architecture**: Smart contracts evolve with changing laws
+- **Governance Integration**: DAO-driven decisions for protocol evolution
+- **Legal Template System**: Standardized approaches for new asset classes
+
+### Technology Evolution
+
+- **Cross-Chain Compatibility**: Multi-blockchain deployment capabilities
+- **AI Model Updates**: Continuous improvement of verification and anomaly detection
+- **Integration APIs**: Standard interfaces for third-party service integration
+- **Performance Scaling**: Architecture scales with adoption and transaction volume
+
+---
+
+This architectural foundation provides the technical substrate for FolioChain Protocol's mission: transforming Costa Rican real estate markets through compliant, transparent, and inclusive tokenization. The following sections will detail the specific implementation of each architectural component, from smart contract logic to AI-powered verification systems.

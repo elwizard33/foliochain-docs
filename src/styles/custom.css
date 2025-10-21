@@ -1,0 +1,171 @@
+/* Custom styles for FolioChain Protocol documentation */
+
+:root {
+  --foliochain-primary: #4f46e5;
+  --foliochain-secondary: #06b6d4;
+  --foliochain-accent: #10b981;
+  --foliochain-bg-gradient: linear-gradient(135deg, var(--foliochain-primary) 0%, var(--foliochain-secondary) 50%, var(--foliochain-accent) 100%);
+}
+
+/* Enhanced hero section */
+.hero {
+  background: var(--foliochain-bg-gradient);
+  background-attachment: fixed;
+}
+
+/* Custom card styling */
+.sl-card {
+  border: 1px solid rgba(79, 70, 229, 0.1);
+  transition: all 0.3s ease;
+}
+
+.sl-card:hover {
+  border-color: var(--foliochain-primary);
+  box-shadow: 0 8px 25px rgba(79, 70, 229, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Code block enhancements */
+.expressive-code {
+  border-radius: 12px;
+  border: 1px solid rgba(79, 70, 229, 0.1);
+}
+
+/* Table styling */
+table {
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+
+table th {
+  background: linear-gradient(135deg, var(--foliochain-primary), var(--foliochain-secondary));
+  color: white;
+  font-weight: 600;
+}
+
+table td, table th {
+  border: 1px solid rgba(79, 70, 229, 0.1);
+  padding: 0.75rem 1rem;
+}
+
+table tr:nth-child(even) {
+  background-color: rgba(79, 70, 229, 0.02);
+}
+
+/* Custom aside styling */
+.sl-markdown-content .starlight-aside {
+  border-left-width: 4px;
+}
+
+.starlight-aside--note {
+  border-left-color: var(--foliochain-primary);
+}
+
+.starlight-aside--tip {
+  border-left-color: var(--foliochain-accent);
+}
+
+.starlight-aside--caution {
+  border-left-color: #f59e0b;
+}
+
+/* Navigation enhancements */
+.sidebar-content a {
+  transition: all 0.2s ease;
+}
+
+.sidebar-content a:hover {
+  color: var(--foliochain-primary);
+  transform: translateX(4px);
+}
+
+/* Header gradient */
+.site-title {
+  background: var(--foliochain-bg-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+}
+
+/* Button styling */
+.sl-link-button {
+  background: var(--foliochain-bg-gradient);
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.sl-link-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(79, 70, 229, 0.25);
+}
+
+/* Custom animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.sl-markdown-content > * {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .sl-card {
+    margin-bottom: 1rem;
+  }
+  
+  table {
+    font-size: 0.9rem;
+  }
+  
+  .hero {
+    background-attachment: scroll;
+  }
+}
+
+/* Search enhancements */
+.search-dialog {
+  border-radius: 12px;
+  border: 2px solid var(--foliochain-primary);
+}
+
+/* Footer customization */
+.sl-footer {
+  border-top: 2px solid rgba(79, 70, 229, 0.1);
+}
+
+/* Loading states */
+.loading-spinner {
+  border: 3px solid rgba(79, 70, 229, 0.1);
+  border-top: 3px solid var(--foliochain-primary);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Print styles */
+@media print {
+  .hero {
+    background: none !important;
+    color: black !important;
+  }
+  
+  .sl-card {
+    border: 1px solid #ccc !important;
+    box-shadow: none !important;
+  }
+}
