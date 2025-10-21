@@ -1,114 +1,34 @@
-# FolioChain Protocol Documentation
+# FolioChain Protocol - Documentation Site
 
-A beautiful Astro Starlight documentation site for the FolioChain Protocol - Costa Rica's premier real-world asset tokenization platform.
+Welcome to the FolioChain Protocol documentation repository. For the live documentation site, visit:
 
-## 🚀 Getting Started
+**🌐 Live Documentation**: https://elwizard33.github.io/foliochain-docs/
 
-### Prerequisites
+This repository contains the complete documentation for FolioChain Protocol, Costa Rica's premier real-world asset tokenization platform, built with Astro Starlight.
 
-- Node.js 18+ 
-- npm or yarn
+## Quick Links
 
-### Installation
+- **Live Site**: https://elwizard33.github.io/foliochain-docs/
+- **GitHub Repository**: https://github.com/elwizard33/foliochain-docs
+- **Executive Summary**: Start with the [Executive Summary](https://elwizard33.github.io/foliochain-docs/overview/executive-summary/)
+- **Technical Architecture**: Deep dive into the [Architecture](https://elwizard33.github.io/foliochain-docs/architecture/overview/)
 
-1. Install dependencies:
+## Development
+
+To run this documentation site locally:
+
 ```bash
 npm install
-```
-
-2. Start the development server:
-```bash
 npm run dev
 ```
 
-3. Open your browser to `http://localhost:4321`
+The site will be available at `http://localhost:4321`
 
-## 📝 Available Scripts
+## Features
 
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview the built site
-- `npm run astro` - Run Astro CLI commands
-
-## 🏗️ Project Structure
-
-```
-/
-├── public/
-├── src/
-│   ├── assets/          # Images and static assets
-│   ├── content/
-│   │   └── docs/        # Documentation pages
-│   │       ├── overview/
-│   │       ├── architecture/
-│   │       └── implementation/
-│   └── styles/          # Custom CSS
-├── astro.config.mjs     # Astro configuration
-└── package.json
-```
-
-## 📖 Documentation Structure
-
-The documentation is organized into several main sections:
-
-### Overview
-- **Executive Summary** - Vision and market opportunity
-- **Introduction** - Global RWA tokenization and Costa Rican landscape  
-- **Protocol Objectives** - The seven pillars of FolioChain Protocol
-
-### Architecture
-- **Technical Overview** - Modular design and hybrid architecture
-- **On-Chain Components** - Smart contracts and blockchain logic
-- **Off-Chain Components** - AI oracles and decentralized storage
-- **Integration Layers** - Bridging digital and legal worlds
-
-### Implementation
-- **Scalability & Tech Stack** - Infrastructure and performance optimization
-
-## 🎨 Customization
-
-The site uses Astro Starlight with custom styling:
-
-- **Colors**: Custom CSS variables for FolioChain branding
-- **Components**: Enhanced cards, code blocks, and navigation
-- **Assets**: Custom logo and hero graphics
-- **Typography**: Professional documentation styling
-
-## 🔧 Configuration
-
-Key configuration files:
-
-- `astro.config.mjs` - Main Astro and Starlight configuration
-- `src/styles/custom.css` - Custom styling and theme variables
-- `tsconfig.json` - TypeScript configuration
-
-## 📦 Built With
-
-- [Astro](https://astro.build/) - Static site generator
-- [Starlight](https://starlight.astro.build/) - Documentation theme
-- [TypeScript](https://www.typescriptlang.org/) - Type safety
-- Custom CSS with CSS Variables for theming
-
-## 🌟 Features
-
-- **Responsive Design** - Works on all devices
-- **Search Functionality** - Built-in search with Starlight
-- **Syntax Highlighting** - Beautiful code block rendering
-- **Interactive Components** - Cards, tabs, steps, and more
-- **SEO Optimized** - Meta tags and structured data
-- **Fast Performance** - Optimized builds with Astro
-
-## 📄 License
-
-This documentation is part of the FolioChain Protocol project.
-
-## 🤝 Contributing
-
-To contribute to the documentation:
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Submit a pull request
-
-For major changes, please open an issue first to discuss what you would like to change.
+- 📚 Comprehensive protocol documentation
+- 🎨 Professional design with custom FolioChain branding  
+- 📱 Mobile-responsive layout
+- 🔍 Built-in search functionality
+- ⚡ Fast static site generation with Astro
+- 🚀 Automatic GitHub Pages deployment
