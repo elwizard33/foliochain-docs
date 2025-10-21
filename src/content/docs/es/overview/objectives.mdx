@@ -1,0 +1,329 @@
+---
+title: Objetivos y Pilares
+description: Los objetivos técnicos y regulatorios centrales del Protocolo FolioChain
+---
+
+---
+title: Objetivos del Protocolo y Propuesta de Valor
+description: Los siete pilares que definen el enfoque de FCP hacia la tokenización compliant de activos del mundo real
+---
+
+import { Card, CardGrid, Aside } from '@astrojs/starlight/components';
+
+El Protocolo FolioChain no es meramente un vehículo
+
+- **Cumplimiento por Diseño**: Integrar reglas SUGEVAL/SUGEF directamente en contratos inteligentes
+- **Aplicación de ZMT**: Validar y hacer cumplir límites de propiedad extranjera automáticamente
+- **Integración de Folio Real**: Cerrar la brecha entre registros analógicos e identidad on-chain
+- **Fraccionamiento Multi-Clase**: Soportar estructuras de propiedad sofisticadas con derechos diferenciados
+- **Interoperabilidad con DeFi**: Permitir uso de tokens RWA como colateral en plataformas de préstamos
+- **Auditoría en Tiempo Real**: Proporcionar trazas de cumplimiento inmutables para reguladores
+- **Mecanismos Evolutivos**: Adaptarse a cambios en el Proyecto de Ley 23.415 y directivas SUGEVAL
+
+Estos objetivos están cristalizados en **siete pilares técnicos**, cada uno esencial para la integridad y función del protocolo.
+
+<CardGrid>
+  <Card title="Cumplimiento" icon="approve-check">
+    Contratos inteligentes que codifican el cumplimiento regulatorio costarricense
+  </Card>
+  <Card title="Seguridad" icon="shield">
+    Arquitectura multi-firma y pruebas formales de corrección
+  </Card>
+  <Card title="Fraccionamiento" icon="puzzle">
+    Soporte multi-clase mediante estándares ERC-1155
+  </Card>
+  <Card title="Interoperabilidad" icon="link">
+    Tokens compatibles con protocolos DeFi líderes
+  </Card>
+  <Card title="Transparencia" icon="eye">
+    Flujos de propiedad e información de cumplimiento rastreables
+  </Card>
+  <Card title="Auditabilidad" icon="list-format">
+    Trazas inmutables para supervisión regulatoria
+  </Card>
+  <Card title="Extensibilidad" icon="rocket">
+    Arquitectura modular para integrar nueva regulación
+  </Card>
+</CardGrid>
+
+---
+
+## Pilar 1: Cumplimiento por Diseño
+
+<Aside type="note">
+A diferencia de plataformas que imponen cumplimiento como una capa posterior a los hechos, FolioChain trata las reglas regulatorias como estructuras inmutables, verificables y ejecutables dentro del tejido del protocolo.
+</Aside>
+
+### Integración SUGEVAL/SUGEF
+
+La **Superintendencia General de Valores (SUGEVAL)** regula ofertas de valores en Costa Rica, incluyendo requisitos para:
+
+- **Prospectos e Información**: Divulgación obligatoria para ofertas públicas
+- **Acreditación de Inversores**: Criterios para participación calificada
+- **Restricciones de Mercado Secundario**: Limitaciones en transferencias no autorizadas
+- **Umbrales de Montos**: Ofertas por debajo de ciertos límites pueden calificar para exenciones
+
+La **Superintendencia General de Entidades Financieras (SUGEF)** aplica:
+
+- **Reglas Anti-Lavado de Dinero (AML)**: Due diligence basado en riesgo, identificación de beneficiarios reales
+- **Listas de Sanciones**: Pantallas contra OFAC, UNSC y listas de la UE
+- **Reportes de Transacciones**: Reportes de actividad sospechosa (SARs), umbrales de transacciones en efectivo
+
+#### Implementación en FolioChain
+
+El protocolo emplea:
+
+1. **Listas Blancas On-Chain**:
+   - Mantiene registros de inversores verificados por KYC/AML
+   - Listas blancas específicas de activos para tokens de ZMT (validación de propiedad extranjera)
+   - Actualización condicional a través de multi-sig respaldado por notarios
+
+2. **Hooks de Transferencia**:
+   - Cada transferencia dispara comprobaciones de cumplimiento on-chain
+   - Valida límites de propiedad (máximo 49% para extranjeros en ZMT)
+   - Asegura que ambas partes están listadas blancas y no en listas de sanciones
+
+3. **Actualización Regulatoria Modular**:
+   - Mecanismo de contrato actualizable para integrar nuevos requisitos (por ejemplo, Proyecto de Ley 23.415)
+   - Permite ajustes sin re-deploy de los tokens fundamentales
+
+---
+
+## Pilar 2: Aplicación de la Zona Marítimo Terrestre
+
+La **Zona Marítimo Terrestre (ZMT)** presenta desafíos regulatorios únicos. Por ley costarricense:
+
+- **Zona de 0-50m**: Dominio público, no puede ser tokenizado
+- **Zona de 50-200m**: Concesiones disponibles, **propiedad extranjera limitada al 49%**
+
+El no hacer cumplir estos límites podría resultar en:
+
+- Revocación de concesiones
+- Sanciones civiles
+- Invalidación de transacciones
+- Daño reputacional al protocolo
+
+### Lógica de Aplicación On-Chain
+
+FolioChain implementa:
+
+1. **Clasificación de Tokens**:
+   - Cada token está marcado con metadatos que indican tipo de activo (ZMT vs. no-ZMT)
+   - Contrato `ZMTComplianceModule` procesa lógica de validación
+
+2. **Algoritmo de Validación de Propiedad**:
+   ```solidity
+   function _checkZMTCompliance(
+       address asset,
+       address buyer,
+       uint256 amount
+   ) internal view returns (bool) {
+       if (!isZMTAsset(asset)) return true;
+       
+       uint256 totalSupply = IERC1155(asset).totalSupply(tokenId);
+       uint256 foreignOwned = computeForeignHoldings(asset);
+       uint256 buyerExistingHoldings = IERC1155(asset).balanceOf(buyer, tokenId);
+       
+       // Comprueba si el comprador es extranjero
+       if (isForeignNational(buyer)) {
+           uint256 newForeignOwned = foreignOwned + amount - buyerExistingHoldings;
+           return (newForeignOwned * 100) <= (totalSupply * 49);
+       }
+       return true;
+   }
+   ```
+
+3. **Oráculos para Verificación de Nacionalidad**:
+   - Integraciones con servicios de verificación de identidad
+   - Validación de pruebas documentales a través de atestaciones off-chain
+   - Atestaciones con firma multi-sig de notarios costarricenses
+
+---
+
+## Pilar 3: Integración del Folio Real
+
+El **Folio Real** es el identificador único de la propiedad en el Registro Nacional. Establecer un puente confiable entre folios analógicos y tokens on-chain es quizás el desafío técnico y legal más crítico.
+
+### Desafíos
+
+- **Sin Acceso API**: Consultas manuales a través de portales web o visitas presenciales
+- **Títulos Disputados**: Registros pueden mostrar gravámenes u órdenes judiciales desconocidas
+- **Retrasos de Actualización**: Transferencias pueden tomar semanas para reflejarse
+
+### Arquitectura de Integración
+
+FolioChain emplea un **mecanismo de oráculo híbrido**:
+
+1. **Oráculos Notariales (Capa 1)**:
+   - Notarios costarricenses verifican títulos mediante consulta directa del Registro
+   - Firman atestaciones con claves de firma rastreadas on-chain
+   - Reportes incluyen: estado del folio, cadena de títulos, derechos de gravamen, restricciones de zonificación
+
+2. **Oráculos Impulsados por IA (Capa 2)**:
+   - Procesamiento OCR de documentos PDF del registro
+   - Análisis de lenguaje natural de anotaciones de escrituras
+   - Esquemas de extracción de datos estructurados
+
+3. **Sistema de Evidencia On-Chain**:
+   - Hashes de documentos almacenados en IPFS
+   - Registros de atestaciones de proveedores de oráculos en blockchain
+   - Cadenas de pruebas criptográficas para auditorías
+
+### Flujo de Tokenización
+
+Antes de acuñar, el protocolo:
+
+1. **Consulta** el Registro Nacional (manualmente vía notario o API cuando/si esté disponible)
+2. **Verifica** que el folio no esté gravado con disputas o transferencias pendientes
+3. **Registra** el hash de prueba y atestaciones de notario on-chain
+4. **Acuña** el token con metadatos enlazados al folio real
+
+---
+
+## Pilar 4: Fraccionamiento Multi-Clase con ERC-1155
+
+A diferencia de NFTs tradicionales que representan propiedad singular de activos únicos, los activos inmobiliarios a menudo requieren:
+
+- **Fraccionamiento**: División en múltiples acciones para permitir micro-inversión
+- **Clases de Acciones**: Intereses diferenciados (por ejemplo, acciones Clase A con derechos de voto, Clase B sin ellos)
+- **Distribución de Rendimiento**: Derechos proporcionales a ingresos por alquiler o ganancias de capital
+
+### ¿Por Qué ERC-1155?
+
+El estándar **ERC-1155** permite:
+
+- Representación de **múltiples clases de tokens dentro de un único contrato**
+- **Operaciones de lote** para transferencias eficientes en gas
+- **Tokens fungibles y no fungibles** en el mismo marco
+
+Mientras que ERC-3643 (T-REX) proporciona controles de cumplimiento completos, puede ser inflexible para configuraciones complejas de fraccionamiento. FolioChain **combina** ERC-1155 con módulos de cumplimiento T-REX para lograr:
+
+- **Flexibilidad de Fraccionamiento**: Clases de tokens arbitrarias por activo
+- **Hooks de Cumplimiento**: Validación obligatoria en cada transferencia
+- **Interoperabilidad DeFi**: Compatibilidad con plataformas de préstamos y staking
+
+### Ejemplo de Uso
+
+Considere una propiedad de $1,000,000 dividida en:
+
+- **1,000 Acciones Clase A** (cada una valorada en $900): Otorgan derechos de voto en mejoras de propiedad
+- **500 Acciones Clase B** (cada una valorada en $200): Rendimiento únicamente, sin derechos de gobernanza
+
+Ambas clases se emiten dentro del mismo contrato ERC-1155, compartiendo lógica de cumplimiento subyacente pero con metadatos distintos y funciones de distribución de rendimiento.
+
+---
+
+## Pilar 5: Interoperabilidad con DeFi
+
+Los tokens RWA derivarían poco valor si existieran en silos aislados. FolioChain se esfuerza por:
+
+- **Permitir préstamos colateralizados** (por ejemplo, depositar tokens de propiedad en Aave o Compound)
+- **Soportar AMMs** para descubrimiento de liquidez y precios
+- **Integrar con protocolos de staking** para oportunidades de generación de rendimiento
+
+### Requisitos para Integración DeFi
+
+1. **Cumplimiento de Interfaces de Tokens**:
+   - Los tokens deben adherirse a estándares ERC reconocidos
+   - Eventos y hooks de transferencia deben cumplir con expectativas de protocolos
+
+2. **Ratios de Liquidación y Colateralización**:
+   - Los protocolos de préstamos requieren oráculos de precios confiables
+   - Los RWAs generalmente necesitan sobrecolateralización debido a volatilidad de precios o riesgos de liquidación
+
+3. **Mecanismos de Oráculo de Precios**:
+   - FolioChain integra con **Chainlink** y **Pyth Network** para feeds de precios en tiempo real
+   - Oráculos específicos para bienes raíces calibrados a factores locales (por ejemplo, indicadores de turismo de ZMT)
+
+### Contratos de Interoperabilidad
+
+El protocolo incluye:
+
+- **Módulo de Envoltorio ERC-20**: Convierte participaciones fraccionadas en tokens ERC-20 compatibles con DeFi
+- **Conectores de Protocolo de Préstamos**: Interfaces adaptadoras para plataformas líderes
+- **Límites de Cumplimiento en Acciones DeFi**: Asegura que incluso en interacciones complejas de DeFi, se respeten las reglas de ZMT
+
+---
+
+## Pilar 6: Transparencia y Auditabilidad
+
+<Aside type="tip">
+Los reguladores y auditores requieren trazas integrales, inmutables y a prueba de manipulación de todas las transacciones, cambios de cumplimiento e intervenciones de gobernanza.
+</Aside>
+
+### Eventos y Logs On-Chain
+
+El protocolo emite eventos granulares para:
+
+- **Acuñaciones de Tokens**: Incluyendo referencias a folio real y atestaciones de notario
+- **Transferencias**: Con checks de cumplimiento y resultados de validación
+- **Actualizaciones de Cumplimiento**: Adiciones/remociones de listas blancas, cambios regulatorios
+- **Distribuciones de Rendimiento**: Dividendos de alquiler, ganancias de capital
+
+Estos eventos son indexados y consultables a través de The Graph u otras soluciones de indexación.
+
+### Módulo de Reportes de Cumplimiento
+
+Una interfaz dedicada permite a reguladores:
+
+1. **Consultar Holdings por Inversores**: Ver todas las posiciones de RWA de una dirección
+2. **Analizar Flujos de Propiedad**: Rastrear cadenas de transferencias para detectar comportamiento sospechoso
+3. **Exportar Reportes Auditables**: Generar PDFs o CSVs de datos de cumplimiento para inspección
+
+### Almacenamiento de Datos Off-Chain
+
+Para documentos voluminosos (escrituras, reportes de inspección, tasaciones):
+
+- **IPFS** para archivado descentralizado
+- **Arweave** para almacenamiento permanente de ciertos documentos legales críticos
+- Hashes almacenados on-chain para verificación de integridad
+
+---
+
+## Pilar 7: Extensibilidad y Gobernanza
+
+El entorno regulatorio de Costa Rica está evolucionando. El **Proyecto de Ley 23.415**, si se promulga, introducirá nuevos requisitos de cumplimiento alrededor de:
+
+- Licencias de Proveedor de Servicios de Activos Virtuales (VASP)
+- Reportes de transacciones transfronterizas mejorados
+- Normas de custodia para activos digitales
+
+FolioChain anticipa tales cambios mediante:
+
+### Arquitectura Modular de Cumplimiento
+
+El protocolo separa la lógica de cumplimiento en módulos enchufables:
+
+- **SugefModule**: Valida reglas AML/CTF
+- **SugevalModule**: Aplica restricciones de valores
+- **ZMTModule**: Verifica límites de propiedad extranjera
+
+Nuevos módulos pueden ser desarrollados, auditados e integrados sin despliegues disruptivos.
+
+### Gobernanza Multi-Sig y DAO
+
+Las decisiones críticas (por ejemplo, adición de nuevos módulos de cumplimiento, actualización de umbrales) se gobiernan mediante:
+
+1. **Consejo Multi-Sig**: Compuesto por notarios costarricenses, representantes de SUGEVAL/SUGEF y líderes del protocolo
+2. **Votación de Propuestas Comunitarias**: Holders de tokens pueden proponer y votar en mejoras no críticas
+3. **Guardianes de Emergencia**: Contratos de pausa para responder a exploits o fallas regulatorias
+
+### Compromiso Regulatorio Proactivo
+
+El equipo central mantiene diálogo continuo con:
+
+- SUGEVAL sobre prácticas de tokens de valores
+- SUGEF sobre mejores prácticas de AML
+- Registro Nacional sobre caminos para integración digital
+
+Estos esfuerzos tienen el propósito de posicionar a FolioChain no como una fuerza disruptiva sino como un socio colaborativo en la modernización del ecosistema inmobiliario de Costa Rica.
+
+---
+
+## Conclusión
+
+Los siete pilares—**Cumplimiento, Seguridad, Fraccionamiento, Interoperabilidad, Transparencia, Auditabilidad y Extensibilidad**—no son abstracciones aspiracionales sino imperativos arquitectónicos realizados a través de implementaciones de contratos inteligentes, integraciones de oráculos e infraestructura de gobernanza.
+
+En las secciones que siguen, examinamos las realizaciones técnicas de estos pilares en profundidad: desde el diseño detallado de contratos on-chain hasta los módulos de verificación impulsados por IA off-chain, desde estrategias de escalabilidad hasta consideraciones de economía de tokens.
+
+A través de estas especificaciones, FolioChain emerge no solo como una plataforma de tokenización, sino como un **tejido conectivo** entre el mundo analógico de registros de propiedad costarricenses y el futuro digital de finanzas programables y sin fronteras.

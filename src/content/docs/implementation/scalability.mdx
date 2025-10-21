@@ -3,6 +3,7 @@ title: Scalability & Tech Stack
 description: Engineering for growth, compliance, and resilience in the Costa Rican market
 ---
 
+import { Tabs, TabItem, Card, CardGrid, Steps, Aside } from '@astrojs/starlight/components';
 
 Beneath the elegant choreography of FolioChain Protocol's legal and compliance logic lies an infrastructure as deliberate as it is dynamic—a technical substratum engineered to scale, adapt, and endure amidst the shifting tectonics of Costa Rican law and global asset markets. Here, every architectural decision is a wager on the future: a commitment to inclusivity, auditability, and the unyielding demands of both code and court.
 
@@ -30,6 +31,59 @@ In a jurisdiction where transaction costs can determine investment accessibility
     Inherits Ethereum's battle-tested security while providing scalable execution
   </Card>
 </CardGrid>
+
+#### Performance Comparison: Polygon PoS vs Ethereum Mainnet
+
+<div style="overflow-x: auto; margin: 2rem 0;">
+  <table class="comparison-table" style="width: 100%; border-collapse: separate; border-spacing: 0; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(79, 70, 229, 0.15);">
+    <thead>
+      <tr style="background: linear-gradient(135deg, #4f46e5, #06b6d4);">
+        <th style="padding: 1rem; color: white; text-align: left; font-weight: 600;">Metric</th>
+        <th style="padding: 1rem; color: white; text-align: left; font-weight: 600;">Polygon PoS</th>
+        <th style="padding: 1rem; color: white; text-align: left; font-weight: 600;">Ethereum Mainnet</th>
+        <th style="padding: 1rem; color: white; text-align: left; font-weight: 600;">Advantage</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom: 1px solid rgba(79, 70, 229, 0.1);">
+        <td style="padding: 1rem; font-weight: 500;">Transaction Cost</td>
+        <td style="padding: 1rem;"><span style="color: #10b981; font-weight: 600;">$0.01 - $0.10</span></td>
+        <td style="padding: 1rem;"><span style="color: #ef4444; font-weight: 600;">$5 - $50+</span></td>
+        <td style="padding: 1rem;"><span class="metric-badge success">Polygon</span></td>
+      </tr>
+      <tr style="border-bottom: 1px solid rgba(79, 70, 229, 0.1);">
+        <td style="padding: 1rem; font-weight: 500;">Block Time</td>
+        <td style="padding: 1rem;"><span style="color: #10b981; font-weight: 600;">~2 seconds</span></td>
+        <td style="padding: 1rem;"><span style="color: #f59e0b; font-weight: 600;">~12 seconds</span></td>
+        <td style="padding: 1rem;"><span class="metric-badge success">Polygon</span></td>
+      </tr>
+      <tr style="border-bottom: 1px solid rgba(79, 70, 229, 0.1);">
+        <td style="padding: 1rem; font-weight: 500;">Throughput (TPS)</td>
+        <td style="padding: 1rem;"><span style="color: #10b981; font-weight: 600;">7,000+</span></td>
+        <td style="padding: 1rem;"><span style="color: #ef4444; font-weight: 600;">15-30</span></td>
+        <td style="padding: 1rem;"><span class="metric-badge success">Polygon</span></td>
+      </tr>
+      <tr style="border-bottom: 1px solid rgba(79, 70, 229, 0.1);">
+        <td style="padding: 1rem; font-weight: 500;">Security Model</td>
+        <td style="padding: 1rem;"><span style="color: #4f46e5; font-weight: 600;">Ethereum-anchored PoS</span></td>
+        <td style="padding: 1rem;"><span style="color: #10b981; font-weight: 600;">Native PoS</span></td>
+        <td style="padding: 1rem;"><span class="metric-badge info">Ethereum</span></td>
+      </tr>
+      <tr style="border-bottom: 1px solid rgba(79, 70, 229, 0.1);">
+        <td style="padding: 1rem; font-weight: 500;">Min. Investment</td>
+        <td style="padding: 1rem;"><span style="color: #10b981; font-weight: 600;">$10 - $50</span></td>
+        <td style="padding: 1rem;"><span style="color: #ef4444; font-weight: 600;">$500+ (gas limits)</span></td>
+        <td style="padding: 1rem;"><span class="metric-badge success">Polygon</span></td>
+      </tr>
+      <tr>
+        <td style="padding: 1rem; font-weight: 500;">Ideal Use Case</td>
+        <td style="padding: 1rem;"><span style="color: #4f46e5; font-weight: 600;">Fractional ownership, retail</span></td>
+        <td style="padding: 1rem;"><span style="color: #4f46e5; font-weight: 600;">Premium assets, institutions</span></td>
+        <td style="padding: 1rem;"><span class="metric-badge info">Context-dependent</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 ### Multi-Chain Strategy
 

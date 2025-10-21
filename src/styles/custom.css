@@ -69,6 +69,257 @@ table tr:nth-child(even) {
   border-left-color: #f59e0b;
 }
 
+/* Tabs styling - highlight tabs with enhanced visibility */
+.starlight-tabs {
+  margin: 2rem 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(79, 70, 229, 0.15);
+}
+
+/* Tab list container with gradient background */
+.starlight-tabs > [role="tablist"] {
+  background: linear-gradient(135deg, rgba(79, 70, 229, 0.15) 0%, rgba(6, 182, 212, 0.15) 100%);
+  border-bottom: 3px solid var(--foliochain-primary);
+  padding: 0.75rem;
+  gap: 1rem;
+  border-radius: 12px 12px 0 0;
+  box-shadow: inset 0 2px 8px rgba(79, 70, 229, 0.1);
+}
+
+/* Individual tab buttons with enhanced prominence */
+.starlight-tabs [role="tab"] {
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid rgba(79, 70, 229, 0.3);
+  border-radius: 8px;
+  padding: 0.875rem 1.75rem;
+  font-weight: 600;
+  font-size: 1.05rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  color: var(--foliochain-primary);
+  box-shadow: 0 2px 8px rgba(79, 70, 229, 0.1);
+}
+
+.starlight-tabs [role="tab"]:hover {
+  background: rgba(79, 70, 229, 0.15);
+  border-color: var(--foliochain-primary);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(79, 70, 229, 0.3);
+}
+
+/* Active/selected tab with maximum prominence */
+.starlight-tabs [role="tab"][aria-selected="true"] {
+  background: linear-gradient(135deg, var(--foliochain-primary), var(--foliochain-secondary));
+  color: white;
+  border-color: var(--foliochain-primary);
+  box-shadow: 0 8px 24px rgba(79, 70, 229, 0.45);
+  transform: translateY(-2px) scale(1.02);
+}
+
+/* Tab panel content with enhanced styling */
+.starlight-tabs [role="tabpanel"] {
+  background: linear-gradient(to bottom, rgba(79, 70, 229, 0.03), rgba(6, 182, 212, 0.03));
+  border: 2px solid rgba(79, 70, 229, 0.15);
+  border-top: none;
+  border-radius: 0 0 12px 12px;
+  padding: 2rem;
+  box-shadow: inset 0 2px 8px rgba(79, 70, 229, 0.05);
+}
+
+/* Dark mode adjustments for tabs */
+:root[data-theme="dark"] .starlight-tabs [role="tab"] {
+  background: rgba(255, 255, 255, 0.08);
+  color: #a5b4fc;
+  border-color: rgba(79, 70, 229, 0.4);
+}
+
+:root[data-theme="dark"] .starlight-tabs [role="tab"]:hover {
+  background: rgba(79, 70, 229, 0.25);
+  border-color: #818cf8;
+}
+
+:root[data-theme="dark"] .starlight-tabs [role="tab"][aria-selected="true"] {
+  background: linear-gradient(135deg, #6366f1, #06b6d4);
+}
+
+:root[data-theme="dark"] .starlight-tabs [role="tabpanel"] {
+  background: linear-gradient(to bottom, rgba(79, 70, 229, 0.08), rgba(6, 182, 212, 0.08));
+}
+
+/* Enhanced CardGrid spacing */
+.sl-container :where(.card-grid) {
+  gap: 1.5rem !important;
+  margin: 2rem 0 !important;
+}
+
+/* Enhanced Card styling */
+.sl-container :where(.card) {
+  border: 2px solid rgba(79, 70, 229, 0.25) !important;
+  border-radius: 12px !important;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.08) !important;
+  background: linear-gradient(135deg, rgba(79, 70, 229, 0.02), rgba(6, 182, 212, 0.02)) !important;
+}
+
+.sl-container :where(.card:hover) {
+  transform: translateY(-6px) scale(1.02) !important;
+  box-shadow: 0 12px 32px rgba(79, 70, 229, 0.25) !important;
+  border-color: var(--foliochain-primary) !important;
+  background: linear-gradient(135deg, rgba(79, 70, 229, 0.08), rgba(6, 182, 212, 0.08)) !important;
+}
+
+.sl-container :where(.card-title) {
+  color: var(--foliochain-primary) !important;
+  font-weight: 600 !important;
+  margin-bottom: 0.75rem !important;
+}
+
+/* Stats and metrics display */
+.stat-card {
+  background: linear-gradient(135deg, rgba(79, 70, 229, 0.05), rgba(6, 182, 212, 0.05));
+  border: 2px solid rgba(79, 70, 229, 0.25);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 1rem 0;
+  text-align: center;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stat-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 12px 32px rgba(79, 70, 229, 0.25);
+  border-color: var(--foliochain-primary);
+}
+
+.stat-value {
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: var(--foliochain-bg-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: block;
+  margin: 0.5rem 0;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: var(--sl-color-gray-3);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+/* Progress bars and indicators */
+.progress-bar {
+  background: rgba(79, 70, 229, 0.1);
+  border-radius: 50px;
+  height: 24px;
+  overflow: hidden;
+  position: relative;
+  margin: 1rem 0;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.progress-fill {
+  background: linear-gradient(90deg, var(--foliochain-primary), var(--foliochain-secondary));
+  height: 100%;
+  transition: width 1s ease;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 12px;
+  color: white;
+  font-weight: 600;
+  font-size: 0.85rem;
+  box-shadow: 0 2px 8px rgba(79, 70, 229, 0.3);
+}
+
+/* Comparison tables enhancement */
+.comparison-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 2rem 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(79, 70, 229, 0.15);
+}
+
+.comparison-table thead th {
+  background: linear-gradient(135deg, var(--foliochain-primary), var(--foliochain-secondary));
+  color: white;
+  padding: 1.25rem;
+  font-weight: 600;
+  text-align: left;
+  border: none;
+}
+
+.comparison-table tbody tr {
+  border-bottom: 1px solid rgba(79, 70, 229, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.comparison-table tbody tr:hover {
+  background: linear-gradient(90deg, rgba(79, 70, 229, 0.08), rgba(6, 182, 212, 0.08));
+  transform: translateX(4px) scale(1.005);
+  box-shadow: -4px 0 0 var(--foliochain-primary);
+}
+
+.comparison-table td {
+  padding: 1.25rem;
+  border: none;
+}
+
+/* Badge/label styling for metrics */
+.metric-badge {
+  display: inline-block;
+  padding: 0.375rem 0.875rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin: 0.25rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.metric-badge.success {
+  background: rgba(16, 185, 129, 0.12);
+  color: #10b981;
+  border: 2px solid rgba(16, 185, 129, 0.35);
+}
+
+.metric-badge.warning {
+  background: rgba(245, 158, 11, 0.12);
+  color: #f59e0b;
+  border: 2px solid rgba(245, 158, 11, 0.35);
+}
+
+.metric-badge.info {
+  background: rgba(79, 70, 229, 0.12);
+  color: var(--foliochain-primary);
+  border: 2px solid rgba(79, 70, 229, 0.35);
+}
+
+.metric-badge:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.metric-badge.success:hover {
+  background: rgba(16, 185, 129, 0.2);
+  border-color: #10b981;
+}
+
+.metric-badge.warning:hover {
+  background: rgba(245, 158, 11, 0.2);
+  border-color: #f59e0b;
+}
+
+.metric-badge.info:hover {
+  background: rgba(79, 70, 229, 0.2);
+  border-color: var(--foliochain-primary);
+}
+
 /* Navigation enhancements */
 .sidebar-content a {
   transition: all 0.2s ease;
@@ -116,6 +367,30 @@ table tr:nth-child(even) {
   animation: fadeInUp 0.6s ease-out;
 }
 
+/* Table of Contents (TOC) width reduction */
+.right-sidebar-container {
+  max-width: 20rem !important;
+  width: 20rem !important;
+}
+
+.right-sidebar {
+  max-width: 20rem !important;
+  width: 20rem !important;
+  padding-left: 0.75rem !important;
+  padding-right: 0.75rem !important;
+}
+
+/* Increase main content width on larger screens */
+@media (min-width: 72rem) {
+  [data-has-sidebar][data-has-toc] .main-pane {
+    order: 1;
+    width: 80rem;
+    --sl-content-margin-inline: auto;
+  }
+}
+
+
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .sl-card {
@@ -128,6 +403,17 @@ table tr:nth-child(even) {
   
   .hero {
     background-attachment: scroll;
+  }
+  
+  /* Reset TOC width on mobile */
+  .right-sidebar-container,
+  .right-sidebar {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+  
+  .main-frame {
+    padding-right: 0 !important;
   }
 }
 

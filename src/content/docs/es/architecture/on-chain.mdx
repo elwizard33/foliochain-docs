@@ -1,0 +1,425 @@
+---
+title: Componentes On-Chain
+description: Arquitectura de contratos inteligentes y la lógica viva de la tokenización de activos costarricenses
+---
+
+import { Tabs, TabItem, Aside } from '@astrojs/starlight/components';
+
+Bajo la elegante superficie del Protocolo FolioChain, un entramado de contratos inteligentes pulsa con precisión determinística—cada contrato un magistrado digital, cada función una cláusula en la constitución viva de la tokenización de activos costarricenses. Aquí, el código no es mera maquinaria sino jurisprudencia: un sistema de reglas aplicables, auditables y siempre adaptables, inscrito en Solidity y moldeado por las mareas cambiantes de la ley local.
+
+## Arquitectura de Contratos Inteligentes
+
+<Aside type="note">
+La suite on-chain de FCP está construida sobre una implementación bifurcada y extendida de ERC-3643 (T-REX), fusionada con la flexibilidad multi-clase de ERC-1155 tanto para representación única de activos como para copropiedad fraccionada.
+</Aside>
+
+En el corazón de la suite on-chain de FCP yace una arquitectura modular donde cada contrato sirve como un módulo soberano pero interoperable. Todos los contratos son compatibles con EVM, actualizables vía proxies UUPS, y fortificados por las bibliotecas probadas en batalla de OpenZeppelin.
+
+### Suite Central de Contratos
+
+<Tabs>
+  <TabItem label="Registro de Identidad">
+    **CRIdentityRegistry** - El guardián de elegibilidad del protocolo
+    
+    Mapea la dirección de cada participante a reclamaciones de cumplimiento verificadas:
+    - Estado KYC/AML con puntuación de riesgo SUGEF
+    - Nacionalidad para aplicación de límites ZMT  
+    - Estado civil para cumplimiento de propiedad conjunta
+    - Verificación de folio real para propietarios
+    
+    Solo acepta verificaciones de oráculos o notarios aprobados.
+  </TabItem>
+  
+  <TabItem label="Motor de Cumplimiento">
+    **CRModularCompliance** - El corazón judicial programable
+    
+    Aplica requisitos regulatorios antes de cada acción:
+    - Umbrales de valores SUGEVAL y requisitos de prospecto
+    - Límites de propiedad extranjera ZMT con cálculo en tiempo real
+    - Validación de estado de folio real vía feeds de oráculo
+    - Cálculos de retención fiscal según tasas de Hacienda
+  </TabItem>
+  
+  <TabItem label="Tokens de Activos">
+    **Maestro (ERC-721)** y contratos **Fraccionados (ERC-1155)**
+    
+    Avatares digitales de bienes raíces costarricenses:
+    - Mapeo inmutable de ID de folio real con versionado
+    - Metadatos ricos incluyendo hashes de documentos legales
+    - Lógica de transferencia con permisos y puertas de cumplimiento
+    - Acciones fraccionadas multi-clase para diferentes derechos
+  </TabItem>
+</Tabs>
+
+## 1. Registro de Identidad: El Guardián de Elegibilidad
+
+El Registro de Identidad sirve como la primera línea de defensa del protocolo—un censo criptográfico que admite solo a participantes elegibles, verificados y conformes.
+
+### Funcionalidad Central
+
+```solidity
+contract CRIdentityRegistry {
+    mapping(address => mapping(uint256 => uint256)) private userClaims;
+    mapping(uint256 => ClaimTopic) public claimTopics;
+    
+    struct ClaimTopic {
+        bool required;
+        address[] issuers; // Oráculos/notarios aprobados
+        uint256 validityPeriod;
+    }
+    
+    function addClaim(
+        address _user,
+        uint256 _topic,
+        bytes calldata _data,
+        bytes calldata _signature
+    ) external onlyApprovedIssuer(_topic) {
+        // Verificar firma y añadir reclamación
+        userClaims[_user][_topic] = block.timestamp;
+        emit ClaimAdded(_user, _topic, msg.sender);
+    }
+}
+```
+
+### Tipos de Reclamación y Validación
+
+<Aside type="tip">
+Las reclamaciones no son meras aserciones sino atestaciones criptográficamente ancladas, emitidas por oráculos impulsados por IA o notarios autorizados.
+</Aside>
+
+**Reclamaciones Estándar:**
+- `KYC_VERIFIED` - Verificación de identidad con cédula/pasaporte
+- `AML_CLEARED` - Puntuación de riesgo SUGEF bajo umbral
+- `NATIONALITY_VERIFIED` - Estado costarricense vs. extranjero
+- `ACCREDITED_INVESTOR` - Estado de acreditación SUGEVAL
+
+**Reclamaciones Específicas de Costa Rica:**
+- `FOLIO_REAL_VERIFIED` - Validación de propiedad
+- `ZMT_ELIGIBLE` - Autorización de inversión en zona marítima
+- `TAX_COMPLIANT` - Situación actual con Hacienda
+- `MARITAL_STATUS_VERIFIED` - Cumplimiento de propiedad conjunta
+
+### Aplicación Vigilante
+
+La lógica del registro es implacable en su precisión:
+
+- Solo usuarios con reclamaciones KYC actuales, verificadas por oráculo pueden tener tokens
+- Reclamaciones de nacionalidad permiten aplicación de límites ZMT en tiempo real
+- Estado civil soporta estatutos de propiedad conjunta de Costa Rica
+- Cada adición, actualización o revocación de reclamación emite eventos auditables
+
+## 2. Registro de Temas de Reclamación: El Léxico de Cumplimiento
+
+El Registro de Temas de Reclamación sirve como el léxico vivo de FCP—un compendio actualizable de atestaciones de cumplimiento requeridas.
+
+### Requisitos de Cumplimiento Dinámicos
+
+```solidity
+contract CRClaimTopicsRegistry {
+    struct Topic {
+        string name;
+        bool required;
+        uint256 validityPeriod;
+        address[] authorizedIssuers;
+    }
+    
+    mapping(uint256 => Topic) public topics;
+    
+    function addTopic(
+        uint256 _topicId,
+        string memory _name,
+        bool _required,
+        uint256 _validityPeriod
+    ) external onlyGovernance {
+        topics[_topicId] = Topic(_name, _required, _validityPeriod, new address[](0));
+        emit TopicAdded(_topicId, _name);
+    }
+}
+```
+
+Este registro se expande a medida que emergen nuevos estatutos, acomodando requisitos del Proyecto de Ley 23.415 y otras regulaciones evolutivas sin interrumpir activos tokenizados existentes.
+
+## 3. Motor de Cumplimiento: El Corazón Judicial del Protocolo
+
+El Motor de Cumplimiento sirve como el magistrado vigilante—la conciencia programable que interroga cada operación de token contra el espectro completo de requisitos regulatorios costarricenses.
+
+### Verificaciones de Cumplimiento Multi-Dimensionales
+
+<Tabs>
+  <TabItem label="Verificación KYC/AML">
+    ```solidity
+    function checkKYCCompliance(address _user) public view returns (bool) {
+        return identityRegistry.hasValidClaim(_user, KYC_VERIFIED) &&
+               identityRegistry.hasValidClaim(_user, AML_CLEARED) &&
+               !isHighRiskUser(_user);
+    }
+    ```
+    
+    Valida documentos de identidad y puntuaciones de riesgo SUGEF antes de cualquier interacción con tokens.
+  </TabItem>
+  
+  <TabItem label="Aplicación de Límites ZMT">
+    ```solidity
+    function checkZMTCompliance(
+        address _token,
+        address _to,
+        uint256 _amount
+    ) public view returns (bool) {
+        if (!isZMTProperty(_token)) return true;
+        
+        uint256 foreignOwnership = calculateForeignOwnership(_token);
+        uint256 newOwnership = foreignOwnership + 
+                              (isForeign(_to) ? _amount : 0);
+        
+        return newOwnership <= MAX_FOREIGN_OWNERSHIP_ZMT;
+    }
+    ```
+    
+    Cálculo en tiempo real previene que propiedad extranjera exceda 49% en Zonas Marítimas.
+  </TabItem>
+  
+  <TabItem label="Cumplimiento de Valores">
+    ```solidity
+    function checkSUGEVALCompliance(
+        address _token,
+        uint256 _totalSupply
+    ) public view returns (bool) {
+        uint256 totalValue = _totalSupply * getTokenPrice(_token);
+        
+        if (totalValue >= SUGEVAL_THRESHOLD) {
+            return hasRegulatoryApproval(_token, SUGEVAL_APPROVAL);
+        }
+        
+        return true;
+    }
+    ```
+    
+    Monitorea rondas de recaudación y aplica requisitos de prospecto.
+  </TabItem>
+</Tabs>
+
+### Lógica Modular y Actualizable
+
+<Aside type="caution">
+Si una transferencia violara límites ZMT, generara violaciones de valores, o involucrara propiedad disputada, el motor rechaza sumariamente la transacción y emite eventos de auditoría detallados.
+</Aside>
+
+El diseño modular del Motor de Cumplimiento permite adaptación rápida:
+
+- **Módulos Enchufables**: Nuevas verificaciones de cumplimiento añadidas sin interrumpir lógica existente
+- **Integración de Oráculo**: Feeds de datos en tiempo real para estado de registro, tasas fiscales y aprobaciones regulatorias
+- **Controles de Emergencia**: Capacidad de pausa inmediata para activos disputados o gravados
+- **Trazas de Auditoría**: Registro completo de cada decisión de cumplimiento y fuente de datos
+
+## 4. Contratos de Tokens de Activos: Avatares Digitales de Bienes Raíces Costarricenses
+
+Los contratos de tokens de activos de FCP representan la encarnación digital de los tesoros físicos de Costa Rica, manteniendo vínculos inmutables con sus realidades legales.
+
+### Tokens Maestros de Activos (ERC-721)
+
+Cada propiedad única está representada por un token maestro indivisible:
+
+```solidity
+contract CRMasterAssetToken is ERC721Upgradeable {
+    struct AssetMetadata {
+        string folioRealId;
+        bytes32 documentHash;
+        uint256 lastRegistryUpdate;
+        AssetStatus status;
+        string location;
+        uint256 area;
+    }
+    
+    mapping(uint256 => AssetMetadata) public assetData;
+    
+    function mint(
+        address _to,
+        string memory _folioRealId,
+        bytes32 _documentHash
+    ) external onlyNotary {
+        require(
+            complianceEngine.checkCompliance(_to, address(this), 1),
+            "Compliance check failed"
+        );
+        
+        uint256 tokenId = nextTokenId++;
+        assetData[tokenId] = AssetMetadata({
+            folioRealId: _folioRealId,
+            documentHash: _documentHash,
+            lastRegistryUpdate: block.timestamp,
+            status: AssetStatus.Active,
+            location: "",
+            area: 0
+        });
+        
+        _mint(_to, tokenId);
+        emit AssetTokenized(tokenId, _folioRealId, _to);
+    }
+}
+```
+
+### Tokens Fraccionados (ERC-1155)
+
+Cuando se invoca el fraccionamiento, el token maestro se bloquea y se acuñan acciones fraccionadas:
+
+```solidity
+contract CRFractionalAssetToken is ERC1155Upgradeable {
+    struct FractionalClass {
+        uint256 masterTokenId;
+        uint256 totalSupply;
+        uint256 maxSupply;
+        FractionType fractionType;
+        bool yieldBearing;
+    }
+    
+    enum FractionType { Economic, Governance, Hybrid }
+    
+    mapping(uint256 => FractionalClass) public fractionClasses;
+    
+    function fractionalize(
+        uint256 _masterTokenId,
+        uint256 _totalFractions,
+        FractionType _type
+    ) external onlyAssetOwner(_masterTokenId) {
+        require(
+            masterAssetToken.isApprovedForAll(msg.sender, address(this)),
+            "Approval required"
+        );
+        
+        // Bloquear token maestro
+        masterAssetToken.safeTransferFrom(
+            msg.sender, 
+            address(this), 
+            _masterTokenId
+        );
+        
+        // Crear clase de fracción
+        uint256 fractionClassId = nextFractionClassId++;
+        fractionClasses[fractionClassId] = FractionalClass({
+            masterTokenId: _masterTokenId,
+            totalSupply: 0,
+            maxSupply: _totalFractions,
+            fractionType: _type,
+            yieldBearing: _type != FractionType.Governance
+        });
+        
+        emit AssetFractionalized(_masterTokenId, fractionClassId, _totalFractions);
+    }
+}
+```
+
+## 5. Módulo de Distribución de Rendimiento: Reparto Automatizado de Ingresos
+
+El Módulo de Distribución de Rendimiento asegura que los ingresos generados por activos fluyan en estricta conformidad tanto con la lógica económica como con la ley fiscal costarricense.
+
+### Lógica de Distribución Automatizada
+
+```solidity
+contract CRYieldDistribution {
+    struct YieldPool {
+        uint256 totalYield;
+        uint256 taxWithholding;
+        uint256 netYield;
+        uint256 distributionDate;
+        mapping(address => bool) claimed;
+    }
+    
+    mapping(uint256 => YieldPool) public yieldPools;
+    
+    function distributeYield(
+        uint256 _tokenId,
+        uint256 _grossYield
+    ) external onlyAssetManager(_tokenId) {
+        uint256 taxRate = oracle.getCurrentTaxRate();
+        uint256 taxAmount = (_grossYield * taxRate) / 10000;
+        uint256 netYield = _grossYield - taxAmount;
+        
+        // Crear pool de rendimiento
+        YieldPool storage pool = yieldPools[_tokenId];
+        pool.totalYield = _grossYield;
+        pool.taxWithholding = taxAmount;
+        pool.netYield = netYield;
+        pool.distributionDate = block.timestamp;
+        
+        // Remitir impuesto a Hacienda
+        _remitTax(taxAmount);
+        
+        emit YieldDistributed(_tokenId, _grossYield, netYield, taxAmount);
+    }
+    
+    function claimYield(uint256 _tokenId) external {
+        require(
+            fractionalToken.balanceOf(msg.sender, _tokenId) > 0,
+            "No tokens owned"
+        );
+        
+        YieldPool storage pool = yieldPools[_tokenId];
+        require(!pool.claimed[msg.sender], "Already claimed");
+        
+        uint256 userShare = calculateUserShare(msg.sender, _tokenId);
+        pool.claimed[msg.sender] = true;
+        
+        payable(msg.sender).transfer(userShare);
+        emit YieldClaimed(msg.sender, _tokenId, userShare);
+    }
+}
+```
+
+<Aside type="note">
+Solo direcciones con reclamaciones KYC válidas y actualizadas son elegibles para distribución de rendimiento. Todos los pagos se registran con retención fiscal automática y remisión a Hacienda.
+</Aside>
+
+## 6. Características de Seguridad y Control de Acceso
+
+La seguridad en FCP forma una ciudadela de defensas concéntricas, abordando tanto vulnerabilidades técnicas como riesgos legales específicos de Costa Rica.
+
+### Control de Acceso Basado en Roles
+
+```solidity
+contract CRAccessControl is AccessControlUpgradeable {
+    bytes32 public constant NOTARY_ROLE = keccak256("NOTARY_ROLE");
+    bytes32 public constant ORACLE_ROLE = keccak256("ORACLE_ROLE");
+    bytes32 public constant ASSET_MANAGER_ROLE = keccak256("ASSET_MANAGER_ROLE");
+    bytes32 public constant COMPLIANCE_OFFICER_ROLE = keccak256("COMPLIANCE_OFFICER_ROLE");
+    
+    modifier onlyNotary() {
+        require(hasRole(NOTARY_ROLE, msg.sender), "Not authorized notary");
+        _;
+    }
+    
+    modifier onlyOracle() {
+        require(hasRole(ORACLE_ROLE, msg.sender), "Not authorized oracle");
+        _;
+    }
+}
+```
+
+### Controles de Emergencia y Actualizabilidad
+
+- **Patrón de Proxy UUPS**: Actualizaciones seguras de contratos con aprobación de gobernanza
+- **Disyuntores de Circuito**: Pausa automática para activos disputados o gravados
+- **Requisitos Multi-Firma**: Funciones críticas requieren múltiples partes autorizadas
+- **Operaciones con Bloqueo Temporal**: Retrasos para cambios mayores permiten resolución de disputas
+
+### Traza de Auditoría y Registro de Eventos
+
+Cada acción de contrato emite eventos granulares con marca de tiempo:
+
+```solidity
+event AssetTokenized(uint256 indexed tokenId, string folioRealId, address indexed owner);
+event ComplianceCheckExecuted(address indexed user, address indexed token, bool result);
+event YieldDistributed(uint256 indexed tokenId, uint256 gross, uint256 net, uint256 tax);
+event EmergencyPause(uint256 indexed tokenId, string reason, address indexed initiator);
+```
+
+Estos eventos alimentan paneles regulatorios y proporcionan evidencia admisible en corte para resolución de disputas.
+
+## Ley Codificada, Ley Anticipada
+
+<Aside type="tip">
+Cada línea de la lógica on-chain de FCP es un pacto con la ley costarricense—no meras directrices, sino requisitos legales codificados aplicados en el momento de ejecución.
+</Aside>
+
+En el crisol de los bienes raíces costarricenses, donde convergen ley, mercado y tecnología, los componentes on-chain del Protocolo FolioChain trascienden el mero código. Representan la lógica viva de confianza, transparencia y cumplimiento—cada contrato un árbitro, cada función una salvaguarda, cada evento un faro en la traza de auditoría.
+
+La certeza determinística de los contratos inteligentes, combinada con la inteligencia adaptativa de los oráculos off-chain, crea un sistema donde el futuro de la propiedad de activos no solo se imagina sino que se inscribe inmutablemente, un bloque a la vez. A medida que la ley costarricense evoluciona y los mercados maduran, estos fundamentos on-chain proporcionan el lecho de roca sobre el cual puede florecer la tokenización inmobiliaria inclusiva, conforme y transparente.

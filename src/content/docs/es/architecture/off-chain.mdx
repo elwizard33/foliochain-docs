@@ -1,0 +1,442 @@
+---
+title: Componentes Off-Chain
+description: El puente inteligente entre la ley y el libro mayor, impulsado por oráculos de IA y almacenamiento descentralizado
+---
+
+import { Tabs, TabItem, Aside } from '@astrojs/starlight/components';
+
+La arquitectura off-chain del Protocolo FolioChain sirve como el tendón y la sinap
+
+sis que atan la certeza determinística de blockchain a las realidades mutables y analógicas de la ley de propiedad costarricense y la práctica de mercado. Aquí, la inteligencia no es meramente artificial sino adaptativa—un conjunto de oráculos impulsados por IA, almacenamiento descentralizado, interfaces centradas en el usuario y asociaciones notariales, cada uno diseñado para resolver las fricciones de una jurisdicción donde los mundos digital y legal permanecen obstinadamente apartados.
+
+## Oráculos Impulsados por IA: Sintetizando Confianza desde Realidades Fragmentadas
+
+<Aside type="note">
+En el corazón de la inteligencia off-chain de FCP yace una constelación de oráculos impulsados por IA—árbitros digitales que no simplemente retransmiten datos, sino que los interrogan, sintetizan y autentican.
+</Aside>
+
+### Arquitectura y Operación
+
+Estos oráculos están arquitecturados como microservicios modulares, cada uno responsable de ingerir, analizar y verificar datos de un espectro de fuentes fragmentadas:
+
+<Tabs>
+  <TabItem label="Registro Nacional">
+    **Scraping Automatizado del Registro**
+    
+    En ausencia de APIs públicas, bots especializados sistemáticamente scrapean los portales web del Registro Nacional:
+    
+    - Estado de propiedad y actualizaciones de folio real
+    - Gravámenes, restricciones legales
+    - Transferencias de propiedad y cambios de título
+    - Modificaciones ordenadas por tribunal o disputas
+    
+    Documentos descargados (PDFs, escrituras escaneadas, certificaciones) son canalizados a un pipeline de procesamiento IA seguro.
+  </TabItem>
+  
+  <TabItem label="Integración Notarial">
+    **Feeds de Datos de Notarios Certificados**
+    
+    Notarios credencializados suben atestaciones digitales y confirmaciones de transacciones:
+    
+    - Certificaciones de transferencia de propiedad
+    - Documentos de verificación de título  
+    - Cartas de opinión legal
+    - Atestaciones de resolución de disputas
+    
+    Cada acto notarial es firmado digitalmente, con marca de tiempo, y vinculado criptográficamente a la identidad on-chain del notario.
+  </TabItem>
+  
+  <TabItem label="Datos Regulatorios">
+    **Integración Multi-Agencia**
+    
+    Ingesta periódica de fuentes regulatorias:
+    
+    - Aprobaciones SUGEVAL y presentaciones de valores
+    - Puntuaciones de riesgo SUGEF y bases de datos AML
+    - Tasas fiscales y requisitos de retención de Hacienda
+    - Actualizaciones del Ministerio sobre políticas de propiedad extranjera
+  </TabItem>
+</Tabs>
+
+### Lógica de Verificación y Procesamiento de IA
+
+El sistema de oráculos emplea una estrategia de verificación sofisticada en capas:
+
+#### Pipeline de Procesamiento de Lenguaje Natural
+
+```python
+class CostaRicaLegalDocumentProcessor:
+    def __init__(self):
+        self.nlp_model = self.load_trained_model("cr_legal_spanish")
+        self.ocr_engine = TesseractOCR(lang="spa")
+        
+    def process_document(self, document_path):
+        # Extracción OCR para documentos escaneados
+        raw_text = self.ocr_engine.extract_text(document_path)
+        
+        # Análisis NLP para extracción de datos estructurados
+        parsed_data = self.nlp_model.extract_entities(raw_text)
+        
+        return {
+            "owner": parsed_data.get("property_owner"),
+            "folio_real": parsed_data.get("folio_real_id"),
+            "encumbrances": parsed_data.get("liens_and_restrictions"),
+            "legal_status": parsed_data.get("title_status"),
+            "confidence_score": parsed_data.get("extraction_confidence")
+        }
+```
+
+#### Consenso Cross-Fuente y Detección de Anomalías
+
+<Steps>
+1. **Ingesta de Datos**: Múltiples fuentes proveen información sobre la misma propiedad o transacción
+2. **Normalización**: Modelos de IA estandarizan formatos de datos y extraen campos clave
+3. **Referencia Cruzada**: Información de registro, notario y fuentes regulatorias es comparada
+4. **Detección de Anomalías**: Modelos de machine learning marcan discrepancias o patrones sospechosos
+5. **Cálculo de Consenso**: Acuerdo multi-oráculo requerido antes que los datos sean considerados canónicos
+6. **Escalación**: Desacuerdos disparan revisión humana e intervención notarial
+</Steps>
+
+```python
+class AnomalyDetectionEngine:
+    def detect_anomalies(self, property_data):
+        anomalies = []
+        
+        # Verificar cambios rápidos de propiedad
+        if self.rapid_ownership_changes(property_data):
+            anomalies.append("SUSPICIOUS_OWNERSHIP_PATTERN")
+            
+        # Verificar consistencia de firma
+        if not self.verify_notary_signatures(property_data):
+            anomalies.append("SIGNATURE_INCONSISTENCY")
+            
+        # Referencia cruzada de datos de registro vs notario
+        if self.registry_notary_mismatch(property_data):
+            anomalies.append("SOURCE_DISCREPANCY")
+            
+        return anomalies
+```
+
+### Anclaje Oráculo-a-Blockchain
+
+<Aside type="tip">
+Una vez verificados, todos los datos críticos son hasheados criptográficamente e inscritos en contratos on-chain relevantes, creando una traza de auditoría inmutable que vincula realidades digitales y legales.
+</Aside>
+
+El proceso de anclaje asegura integridad de datos y ejecutabilidad legal:
+
+```solidity
+contract OracleDataAnchor {
+    struct DataAttestation {
+        bytes32 dataHash;
+        address oracle;
+        uint256 timestamp;
+        string dataType;
+        uint8 consensusCount;
+    }
+    
+    mapping(string => DataAttestation) public attestations;
+    
+    function anchorData(
+        string memory _folioRealId,
+        bytes32 _dataHash,
+        string memory _dataType
+    ) external onlyOracle {
+        require(consensusReached(_folioRealId, _dataHash), "Insufficient consensus");
+        
+        attestations[_folioRealId] = DataAttestation({
+            dataHash: _dataHash,
+            oracle: msg.sender,
+            timestamp: block.timestamp,
+            dataType: _dataType,
+            consensusCount: getConsensusCount(_folioRealId, _dataHash)
+        });
+        
+        emit DataAnchored(_folioRealId, _dataHash, msg.sender);
+    }
+}
+```
+
+## Almacenamiento Descentralizado: Gestión de Documentos A Prueba de Manipulación
+
+Todos los documentos legales, de cumplimiento y transaccionales se retienen en sistemas de almacenamiento descentralizado, asegurando tanto accesibilidad como inmutabilidad.
+
+### Arquitectura de Almacenamiento
+
+<Tabs>
+  <TabItem label="Integración IPFS">
+    **Almacenamiento Direccionado por Contenido**
+    
+    Usado para documentos dinámicos, frecuentemente accedidos:
+    
+    ```javascript
+    class IPFSDocumentManager {
+        async storeDocument(document, metadata) {
+            // Encriptar documentos sensibles
+            const encryptedDoc = await this.encrypt(document);
+            
+            // Subir a IPFS
+            const result = await this.ipfs.add(encryptedDoc);
+            
+            // Almacenar hash on-chain
+            await this.contract.storeDocumentHash(
+                metadata.folioRealId,
+                result.cid.toString(),
+                metadata.documentType
+            );
+            
+            return result.cid;
+        }
+    }
+    ```
+  </TabItem>
+  
+  <TabItem label="Archivo Arweave">
+    **Almacenamiento Permanente de Documentos**
+    
+    Documentos legales críticos que requieren retención perpetua:
+    
+    - Escrituras de propiedad originales
+    - Actos notariales y certificaciones
+    - Órdenes judiciales y decisiones legales
+    - Presentaciones y aprobaciones regulatorias
+    
+    El modelo paga-una-vez, almacena-para-siempre de Arweave asegura que los documentos permanezcan accesibles para procedimientos legales décadas en el futuro.
+  </TabItem>
+</Tabs>
+
+### Control de Acceso y Privacidad
+
+El acceso a documentos se gestiona mediante encriptación basada en roles y permisos de contratos inteligentes:
+
+```javascript
+class DocumentAccessControl {
+    async grantAccess(documentCID, userAddress, accessLevel) {
+        // Verificar nivel de autorización del usuario
+        const authorized = await this.verifyAuthorization(userAddress, accessLevel);
+        if (!authorized) throw new Error("Insufficient permissions");
+        
+        // Generar clave de acceso limitada en tiempo
+        const accessKey = await this.generateAccessKey(documentCID, userAddress);
+        
+        // Registrar concesión de acceso on-chain
+        await this.contract.logAccessGrant(documentCID, userAddress, accessLevel);
+        
+        return accessKey;
+    }
+}
+```
+
+<Aside type="caution">
+Documentos sensibles son encriptados en reposo, con claves de acceso gestionadas vía protocolos seguros basados en roles. Solo partes autorizadas—propietarios de activos, notarios, reguladores—pueden desencriptar y ver documentos privados.
+</Aside>
+
+## Sistemas Frontend/Backend: Portal de Usuario y Orquestación
+
+El ecosistema de dApp proporciona la interfaz de cara al usuario mientras los sistemas backend orquestan flujos de trabajo complejos entre usuarios, oráculos, almacenamiento y contratos blockchain.
+
+### Flujo de Incorporación de Usuarios y KYC
+
+El proceso de incorporación completo asegura cumplimiento desde la primera interacción:
+
+<Steps>
+1. **Conexión de Billetera**: Usuarios conectan vía MetaMask o billeteras EVM compatibles
+2. **Verificación de Identidad**: Integración con proveedores KYC como Jumio u Onfido
+3. **Procesamiento de Documentos**: Validación impulsada por IA de cédula, pasaporte y prueba de residencia
+4. **Evaluación de Riesgo**: Puntuación alineada con SUGEF y screening de sanciones
+5. **Emisión de Reclamaciones**: Atestaciones criptográficas escritas en Registro de Identidad
+6. **Autorización de Acceso**: Contratos inteligentes otorgan derechos de participación en el protocolo
+</Steps>
+
+```javascript
+class KYCOrchestrator {
+    async processKYC(userAddress, documents) {
+        // Paso 1: Validación de documentos
+        const validationResult = await this.validateDocuments(documents);
+        if (!validationResult.valid) return { success: false, error: validationResult.error };
+        
+        // Paso 2: Evaluación de riesgo
+        const riskScore = await this.calculateRiskScore(documents);
+        if (riskScore > SUGEF_RISK_THRESHOLD) return { success: false, error: "High risk user" };
+        
+        // Paso 3: Generar reclamaciones
+        const claims = await this.generateClaims(documents, riskScore);
+        
+        // Paso 4: Atestación de oráculo
+        const attestation = await this.requestOracleAttestation(claims);
+        
+        // Paso 5: Registro on-chain
+        await this.identityRegistry.addClaims(userAddress, claims, attestation);
+        
+        return { success: true, claims };
+    }
+}
+```
+
+### Interfaz de Descubrimiento de Activos e Inversión
+
+El marketplace proporciona información completa de activos con verificación de cumplimiento en tiempo real:
+
+```javascript
+class AssetMarketplace {
+    async getAssetDetails(tokenId) {
+        // Obtener metadatos on-chain
+        const onChainData = await this.assetContract.getAssetMetadata(tokenId);
+        
+        // Recuperar documentos de almacenamiento descentralizado
+        const documents = await this.storageManager.getDocuments(onChainData.documentHashes);
+        
+        // Obtener estado de cumplimiento actual
+        const complianceStatus = await this.oracle.getComplianceStatus(onChainData.folioRealId);
+        
+        // Calcular elegibilidad de inversión
+        const eligibility = await this.checkInvestmentEligibility(tokenId, userAddress);
+        
+        return {
+            property: onChainData,
+            legalDocuments: documents,
+            compliance: complianceStatus,
+            eligibility: eligibility,
+            marketData: await this.getMarketData(tokenId)
+        };
+    }
+}
+```
+
+### Paneles de Cumplimiento y Monitoreo
+
+Interfaces de monitoreo en tiempo real sirven necesidades de diferentes stakeholders:
+
+<Tabs>
+  <TabItem label="Panel de Emisor">
+    **Interfaz de Propietario/Gestor de Propiedad**
+    
+    - Rendimiento de activos y composición de propiedad
+    - Estado de cumplimiento y acciones requeridas
+    - Historial de distribución de rendimiento y reporte fiscal
+    - Aprobaciones notariales pendientes y actualizaciones de registro
+  </TabItem>
+  
+  <TabItem label="Portal de Inversor">
+    **Interfaz de Tenedor de Tokens**
+    
+    - Vista general de portafolio y seguimiento de rendimiento
+    - Estado de cumplimiento y requisitos de renovación
+    - Oportunidades de mercado secundario
+    - Participación en gobernanza y votación
+  </TabItem>
+  
+  <TabItem label="Panel Regulatorio">
+    **Interfaz de Supervisión de Autoridades**
+    
+    - Reporte de cumplimiento automatizado
+    - Monitoreo de transacciones y trazas de auditoría
+    - Evaluación de riesgo y herramientas de investigación
+    - Vigilancia de mercado y detección de anomalías
+  </TabItem>
+</Tabs>
+
+## Asociaciones Notariales: Anclajes Humanos de Legitimidad Digital
+
+Los notarios sirven como custodios legales de confianza del protocolo, proporcionando el elemento humano esencial para la ejecutabilidad legal costarricense.
+
+### Credencialización e Identidad Digital
+
+<Steps>
+1. **KYC Mejorado**: Verificación de identidad rigurosa más allá de requisitos de usuario estándar
+2. **Verificación de Licencia**: Validación de credenciales notariales con autoridades costarricenses
+3. **Firmas Digitales**: Registro de claves de firma criptográfica
+4. **Identidad On-Chain**: Estado de notario atestiguado en contratos inteligentes
+5. **Bonding y Seguros**: Cobertura de responsabilidad profesional para actividades de protocolo
+</Steps>
+
+### Integración de Flujo de Trabajo de Atestación
+
+```javascript
+class NotaryWorkflow {
+    async processPropertyAttestation(folioRealId, documents) {
+        // Paso 1: Revisión y validación de documentos
+        const review = await this.reviewDocuments(documents);
+        if (!review.approved) return { success: false, issues: review.issues };
+        
+        // Paso 2: Verificación de registro
+        const registryStatus = await this.verifyRegistryStatus(folioRealId);
+        
+        // Paso 3: Generación de opinión legal
+        const legalOpinion = await this.generateLegalOpinion(folioRealId, documents);
+        
+        // Paso 4: Atestación digital
+        const attestation = await this.signAttestation({
+            folioRealId,
+            documents: documents.map(d => d.hash),
+            opinion: legalOpinion,
+            timestamp: Date.now()
+        });
+        
+        // Paso 5: Anclaje blockchain
+        await this.oracleContract.submitAttestation(attestation);
+        
+        return { success: true, attestation };
+    }
+}
+```
+
+### Puente Legal y Admisibilidad en Tribunal
+
+<Aside type="note">
+Cada acto notarial se registra, marca con timestamp y vincula a la identidad digital del notario, asegurando auditabilidad completa y admisibilidad en tribunal en procedimientos legales costarricenses.
+</Aside>
+
+Las atestaciones notariales sirven propósitos duales:
+
+- **Protocolo Digital**: Entradas de oráculo de alta confianza ponderadas fuertemente en mecanismos de consenso
+- **Sistema Legal**: Evidencia admisible en tribunal manteniendo cadena de custodia de digital a físico
+
+## Integración de Sistema y Consistencia de Datos
+
+El sistema off-chain mantiene consistencia mediante mecanismos de coordinación sofisticados:
+
+### Arquitectura Impulsada por Eventos
+
+```javascript
+class EventOrchestrator {
+    constructor() {
+        this.eventBus = new EventBus();
+        this.setupEventHandlers();
+    }
+    
+    setupEventHandlers() {
+        // Actualización de registro dispara verificación de cumplimiento
+        this.eventBus.on('registry.updated', async (event) => {
+            const complianceCheck = await this.performComplianceCheck(event.folioRealId);
+            if (!complianceCheck.valid) {
+                await this.pauseAsset(event.folioRealId, complianceCheck.reason);
+            }
+        });
+        
+        // Atestación notarial actualiza consenso de oráculo
+        this.eventBus.on('notary.attested', async (event) => {
+            await this.updateOracleConsensus(event.folioRealId, event.attestation);
+        });
+    }
+}
+```
+
+### Consenso y Resolución de Disputas
+
+Cuando los oráculos difieren o se detectan anomalías:
+
+<Steps>
+1. **Pausa Automática**: Tokens afectados son congelados inmediatamente
+2. **Notificación de Stakeholders**: Partes relevantes alertadas vía múltiples canales
+3. **Recopilación de Evidencia**: Todas las fuentes de datos conflictivas compiladas para revisión
+4. **Revisión Experta**: Notarios calificados y expertos legales evalúan la situación
+5. **Resolución**: Consenso alcanzado mediante gobernanza o arbitraje
+6. **Actualización del Sistema**: Datos corregidos propagados y tokens descongelados
+</Steps>
+
+## Conclusión: Inteligencia como Piedra Angular de Confianza
+
+En el Protocolo FolioChain, los componentes off-chain sirven como la piedra angular de confianza, cumplimiento y ejecutabilidad. Los oráculos impulsados por IA transmutan datos analógicos fragmentados en verdad digital accionable; el almacenamiento descentralizado asegura que cada documento permanezca a prueba de manipulación y listo para reguladores; interfaces sofisticadas orquestan viajes de usuario fluidos; y las asociaciones notariales anclan cada acto digital en el lecho de roca legal costarricense.
+
+Juntos, estos módulos transforman las complejidades analógicas de los bienes raíces costarricenses en un commons digital transparente, inclusivo y a prueba de futuro—donde cada activo tokenizado lleva el peso completo de autoridad legal mientras abraza la eficiencia y accesibilidad de la tecnología blockchain.

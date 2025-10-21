@@ -1,0 +1,184 @@
+---
+title: Descripción General de la Arquitectura Técnica
+description: Filosofía de diseño modular y flujos de datos híbridos que impulsan el Protocolo FolioChain
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+La arquitectura técnica del Protocolo FolioChain es una sinfonía de precisión modular, orquestada para armonizar el rigor determinístico de blockchain con el matiz interpretativo de la inteligencia off-chain. En su núcleo, FCP no es monolítico ni estático; es un marco vivo, en capas—cada módulo un instrumento distinto, cada flujo de datos un pasaje cuidadosamente trazado—diseñado para adaptarse, auditar y aplicar dentro de los contornos cambiantes de la ley costarricense y la práctica de mercado.
+
+## Filosofía de Diseño Híbrido
+
+<Aside type="note">
+La arquitectura de FCP es deliberadamente híbrida, bifurcando responsabilidades entre contratos inteligentes on-chain y componentes off-chain donde oráculos impulsados por IA, actores legales y servicios de cumplimiento interpretan y validan eventos del mundo real.
+</Aside>
+
+Esta dualidad no es un compromiso sino una necesidad: asegura que cada activo tokenizado, cada transacción y cada verificación de cumplimiento esté fundamentado tanto en certeza criptográfica como en las realidades cambiantes de la ley de propiedad costarricense, la práctica de registro y la supervisión regulatoria.
+
+### ¿Por Qué Arquitectura Híbrida?
+
+El enfoque híbrido aborda desafíos fundamentales en el ecosistema inmobiliario de Costa Rica:
+
+- **Sistemas de Registro Analógicos**: No existen APIs públicas para el Registro Nacional
+- **Procesos Legales Centrados en Humanos**: Los notarios siguen siendo esenciales para la ejecutabilidad legal  
+- **Evolución Regulatoria**: Leyes como el Proyecto de Ley 23.415 requieren mecanismos de cumplimiento adaptables
+- **Verificación Multi-Fuente**: La verdad emerge del consenso entre fuentes de datos fragmentadas
+
+## Estructura Modular: Componentes Centrales
+
+La modularidad del protocolo permite tanto la asignación granular de responsabilidades como la interoperabilidad fluida entre todos los componentes del sistema.
+
+<CardGrid stagger>
+  <Card title="Módulos On-Chain" icon="rocket">
+    Contratos inteligentes que proporcionan lógica determinística, ejecución transparente y mantenimiento de registros inmutables
+  </Card>
+  <Card title="Inteligencia Off-Chain" icon="laptop">
+    Oráculos impulsados por IA, servicios de cumplimiento e interfaces de usuario que conectan los mundos digital y legal
+  </Card>
+  <Card title="Capa de Integración" icon="puzzle">
+    Flujos de datos y mecanismos de atestación que aseguran coherencia entre estados on-chain y off-chain
+  </Card>
+</CardGrid>
+
+### Módulos On-Chain
+
+La capa blockchain proporciona certeza criptográfica y aplicación programable:
+
+- **Registro de Identidad**: Custodio de identidades de usuarios y reclamaciones de cumplimiento, extendido para atributos legales costarricenses
+- **Motor de Cumplimiento**: Corazón programable de aplicación regulatoria, aplicando dinámicamente KYC/AML, límites de propiedad y mapeo de folio real
+- **Contratos de Tokens de Activos**: Encarnación digital de activos del mundo real usando tokens ERC-721 (maestro) y ERC-1155 (fraccionados)
+- **Módulo de Distribución de Rendimiento**: Automatiza asignación de ingresos pro-rata y retención fiscal legal
+- **Escrow y Liquidación**: Media la finalidad transaccional con requisitos de atestación notarial
+- **Gobernanza y Actualización**: Evolución del protocolo impulsada por DAO, habilitada por proxy UUPS
+- **Registro de Eventos**: Trazas de auditoría granulares, con marca de tiempo para cumplimiento regulatorio
+
+### Módulos Off-Chain
+
+La capa off-chain proporciona inteligencia, interpretación e integración con sistemas heredados:
+
+- **Capa de Oráculo**: Conjunto de oráculos impulsados por IA y multi-fuente que agregan datos de registros, atestaciones notariales y estados de cumplimiento
+- **Verificación KYC/AML**: Integración con proveedores de cumplimiento y reguladores para emisión de reclamaciones criptográficas
+- **Integración del Registro Nacional**: Análisis impulsado por IA/ML de documentos legales y detección de anomalías
+- **Panel Legal/Cumplimiento**: Monitoreo en tiempo real y reporte regulatorio automatizado
+- **Frontend/Backend de dApp**: Portal de usuario que orquesta incorporación, inversión y gestión de rendimiento
+- **Almacenamiento Descentralizado**: Integración IPFS/Arweave para retención de documentos a prueba de manipulación
+
+## Flujos de Datos y Control
+
+<Aside type="tip">
+La coreografía de datos de FCP asegura que cada acción de usuario, verificación regulatoria y comprobación de cumplimiento mantenga coherencia entre realidades digitales y legales.
+</Aside>
+
+### Flujo de Incorporación de Usuarios
+
+1. **Inicio de dApp**: Usuario conecta billetera y comienza proceso KYC
+2. **Verificación Off-Chain**: Servicios KYC/AML validan documentos de identidad
+3. **Reclamaciones Criptográficas**: Atributos verificados emitidos como atestaciones ancladas en blockchain
+4. **Inscripción en Registro**: Reclamaciones escritas en el Registro de Identidad on-chain
+5. **Autorización de Acceso**: Motor de cumplimiento otorga derechos de participación en el protocolo
+
+### Flujo de Tokenización de Activos
+
+1. **Solicitud del Emisor**: Propietario o notario inicia tokenización vía dApp
+2. **Verificación de Oráculo**: Sistemas de IA analizan datos de registro, documentos legales y atestaciones notariales
+3. **Consenso Multi-Fuente**: Capa de oráculo sintetiza y valida todas las fuentes de datos
+4. **Acuñación de Cumplimiento**: Contratos inteligentes verifican requisitos regulatorios antes de crear el token
+5. **Implementación de Activo**: Tokens maestro ERC-721 y fraccionados ERC-1155 desplegados con mapeo de folio real
+
+### Flujo de Ejecución de Transacciones
+
+1. **Inicio de Transferencia**: Usuario intenta transferencia de token o reclamación de rendimiento
+2. **Cumplimiento en Tiempo Real**: Motor verifica estado KYC, límites de propiedad y validez de registro
+3. **Atestación de Oráculo**: Verificación fresca de puntos de datos críticos (estado de folio real, tasas fiscales)
+4. **Aplicación Automatizada**: Contratos inteligentes ejecutan o rechazan según resultados de cumplimiento
+5. **Emisión de Eventos**: Todas las acciones registradas con marcas de tiempo y atestaciones vinculadas
+
+## Patrones de Integración del Sistema
+
+### Comunicación Oráculo-a-Contrato
+
+- **Anclaje Criptográfico**: Datos off-chain hasheados y almacenados on-chain para verificación de integridad
+- **Actualizaciones Impulsadas por Eventos**: Cambios de registro disparan notificaciones de oráculo y actualizaciones de estado de contrato
+- **Mecanismos de Consenso**: Múltiples oráculos deben acordar antes de aceptar cambios de estado críticos
+- **Resolución de Disputas**: Desacuerdos pausan automáticamente tokens afectados y escalan a gobernanza
+
+### Flujo de Integración Notarial
+
+- **Credencialización Digital**: Notarios incorporados con verificación mejorada de KYC y licencia
+- **Pipeline de Atestación**: Documentos firmados subidos, verificados y anclados on-chain
+- **Autorización de Transacciones**: Aprobación notarial requerida para escrows, transferencias y resolución de disputas
+- **Puente Legal**: Archivos físicos mantenidos junto con registros digitales inmutables
+
+### Automatización de Reportes Regulatorios
+
+- **Generación de Panel**: Datos de cumplimiento en tiempo real agregados para acceso de emisores y reguladores
+- **Presentación Automatizada**: Reportes periódicos formateados y transmitidos a autoridades relevantes
+- **Mantenimiento de Traza de Auditoría**: Historiales de transacciones completos disponibles para revisión regulatoria
+- **Soporte de Investigación**: Herramientas de acceso privilegiado para aplicación de cumplimiento
+
+## Consideraciones de Escalabilidad y Rendimiento
+
+### Optimización de Capa Blockchain
+
+- **Selección de Polygon PoS**: Blockchain de bajo costo y alto rendimiento para micro-inversiones
+- **Preparación de Puente Ethereum**: Activos de alto valor pueden migrar a capa de máxima seguridad
+- **Integración Layer 2**: Compatibilidad futura con soluciones de escalado emergentes
+
+### Eficiencia Off-Chain
+
+- **Arquitectura de Microservicios**: Escalado independiente de componentes de oráculo, cumplimiento e interfaz de usuario
+- **Estrategias de Caché**: Datos de registro y cumplimiento frecuentemente accedidos en caché para rendimiento
+- **Balanceo de Carga**: Distribución geográfica de servicios para acceso global de usuarios
+
+### Estrategia de Almacenamiento de Datos
+
+- **Almacenamiento Caliente vs. Frío**: Datos de cumplimiento activos on-chain, documentos de archivo en Arweave
+- **Direccionamiento de Contenido**: IPFS asegura integridad de documentos sin costos de almacenamiento blockchain
+- **Compresión y Optimización**: Datos procesados por IA resumidos para almacenamiento on-chain eficiente
+
+## Arquitectura de Seguridad
+
+<Aside type="caution">
+La seguridad multicapa aborda tanto vulnerabilidades técnicas como riesgos legales específicos de Costa Rica.
+</Aside>
+
+### Seguridad de Contratos Inteligentes
+
+- **Verificación Formal**: Prueba matemática de corrección de contrato
+- **Auditorías de Terceros**: Revisiones de seguridad independientes por firmas establecidas
+- **Mecanismos de Actualización**: Proxies UUPS permiten evolución segura de contratos
+- **Controles de Emergencia**: Funciones de pausa para respuesta rápida a incidentes
+
+### Seguridad de Oráculo
+
+- **Validación Multi-Fuente**: Ninguna fuente de datos única puede comprometer la integridad del sistema
+- **Firmas Criptográficas**: Todas las atestaciones notariales y regulatorias firmadas digitalmente
+- **Detección de Anomalías**: Modelos de IA marcan patrones sospechosos para revisión humana
+- **Sistemas de Redundancia**: Oráculos de respaldo se activan si las fuentes primarias fallan
+
+### Seguridad de Control de Acceso
+
+- **Permisos Basados en Roles**: Control granular sobre funciones sensibles del sistema
+- **Requisitos Multi-Firma**: Operaciones críticas requieren múltiples partes autorizadas
+- **Operaciones con Bloqueo Temporal**: Retrasos para cambios mayores permiten resolución de disputas
+- **Registro de Auditoría**: Historial completo de accesos para forenses de seguridad
+
+## Preparación para el Futuro y Extensibilidad
+
+### Adaptación Regulatoria
+
+- **Ganchos de Cumplimiento Modulares**: Nuevos requisitos legales integrados sin interrumpir el sistema
+- **Arquitectura Actualizable**: Contratos inteligentes evolucionan con leyes cambiantes
+- **Integración de Gobernanza**: Decisiones impulsadas por DAO para evolución del protocolo
+- **Sistema de Plantillas Legales**: Enfoques estandarizados para nuevas clases de activos
+
+### Evolución Tecnológica
+
+- **Compatibilidad Cross-Chain**: Capacidades de despliegue multi-blockchain
+- **Actualizaciones de Modelos de IA**: Mejora continua de verificación y detección de anomalías
+- **APIs de Integración**: Interfaces estándar para integración de servicios de terceros
+- **Escalado de Rendimiento**: La arquitectura escala con adopción y volumen de transacciones
+
+---
+
+Esta base arquitectónica proporciona el sustrato técnico para la misión del Protocolo FolioChain: transformar los mercados inmobiliarios costarricenses mediante tokenización conforme, transparente e inclusiva. Las siguientes secciones detallarán la implementación específica de cada componente arquitectónico, desde la lógica de contratos inteligentes hasta los sistemas de verificación impulsados por IA.

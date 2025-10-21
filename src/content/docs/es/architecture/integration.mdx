@@ -1,0 +1,486 @@
+---
+title: Capas de Integración
+description: El puente vivo entre código y tribunal, orquestando flujos de datos fluidos y ejecutabilidad legal
+---
+
+import { Tabs, TabItem, Steps, Aside } from '@astrojs/starlight/components';
+
+Donde la ley está escrita en tinta y el código en compuertas lógicas, la capa de integración del Protocolo FolioChain se erige como el puente vivo—una coreografía intrincada de protocolos, señales y atestaciones que transmutan el pulso analógico de los mercados de propiedad costarricenses en las certezas cristalinas de blockchain. Aquí, el alma híbrida de FCP se revela: ni completamente digital ni obstinadamente analógica, sino una sinfonía de ambas, orquestada para asegurar que cada acción on-chain esté enraizada en la verdad del mundo real.
+
+## Feeds de Datos de Oráculo: Síntesis de Verdad Multi-Fuente
+
+<Aside type="note">
+En el corazón de esta integración late la capa de oráculo—una constelación de centinelas impulsados por IA y anclados en humanos, cada uno encargado de la agregación, verificación y anclaje vigilante de datos del paisaje legal fragmentado de Costa Rica.
+</Aside>
+
+### Arquitectura de Agregación Multi-Fuente
+
+El sistema de oráculos opera bajo un principio de consenso escéptico—ninguna fuente única de verdad es confiable, y todos los datos críticos deben ser corroborados a través de múltiples canales independientes:
+
+<Tabs>
+  <TabItem label="Scraping de Registro">
+    **Monitoreo Automatizado del Registro Nacional**
+    
+    Bots especializados monitorean continuamente el Registro Nacional:
+    
+    ```python
+    class RegistryMonitor:
+        def __init__(self):
+            self.scraper = RegistryWebScraper()
+            self.ai_processor = DocumentAI()
+            self.anomaly_detector = AnomalyEngine()
+            
+        async def monitor_folio_real(self, folio_id):
+            # Scrapear estado actual
+            raw_data = await self.scraper.get_property_status(folio_id)
+            
+            # Procesamiento IA
+            structured_data = self.ai_processor.parse_documents(raw_data)
+            
+            # Detección de anomalías
+            anomalies = self.anomaly_detector.check_changes(folio_id, structured_data)
+            
+            if anomalies:
+                await self.escalate_anomalies(folio_id, anomalies)
+            
+            return structured_data
+    ```
+  </TabItem>
+  
+  <TabItem label="Atestaciones Notariales">
+    **Estado Legal Verificado por Humanos**
+    
+    Notarios credencializados proporcionan interpretaciones legales autorizadas:
+    
+    ```javascript
+    class NotaryAttestationSystem {
+        async processAttestation(notaryId, folioRealId, attestation) {
+            // Verificar credenciales del notario
+            const verified = await this.verifyNotaryCredentials(notaryId);
+            if (!verified) throw new Error("Invalid notary");
+            
+            // Validar firma digital
+            const signatureValid = await this.validateSignature(
+                attestation, 
+                notaryId
+            );
+            
+            // Referencia cruzada con datos de registro
+            const consistent = await this.checkConsistency(
+                folioRealId, 
+                attestation
+            );
+            
+            return {
+                attestation,
+                verified: signatureValid && consistent,
+                timestamp: Date.now(),
+                notary: notaryId
+            };
+        }
+    }
+    ```
+  </TabItem>
+  
+  <TabItem label="Feeds Regulatorios">
+    **Integración de Datos Multi-Agencia**
+    
+    Recopilación automatizada de fuentes regulatorias:
+    
+    - Aprobaciones de valores y umbrales SUGEVAL
+    - Evaluaciones de riesgo y listas de sanciones SUGEF
+    - Tasas fiscales y requisitos de retención de Hacienda
+    - Estado de conservación del ministerio ambiental
+  </TabItem>
+</Tabs>
+
+### Motor de Consenso Impulsado por IA
+
+El motor de consenso emplea machine learning para sintetizar la verdad desde fuentes potencialmente conflictivas:
+
+```python
+class ConsensusEngine:
+    def __init__(self):
+        self.trust_scores = TrustScoreManager()
+        self.ml_model = ConflictResolutionModel()
+        
+    def calculate_consensus(self, folio_real_id, data_sources):
+        consensus_data = {}
+        conflicts = []
+        
+        for field in CRITICAL_FIELDS:
+            field_data = [source.get(field) for source in data_sources]
+            
+            # Remover valores None
+            field_data = [d for d in field_data if d is not None]
+            
+            if len(set(field_data)) == 1:
+                # Consenso perfecto
+                consensus_data[field] = field_data[0]
+            elif len(set(field_data)) > 1:
+                # Conflicto detectado
+                conflicts.append({
+                    'field': field,
+                    'values': field_data,
+                    'sources': [s.source_id for s in data_sources]
+                })
+                
+                # Usar modelo ML para resolver
+                resolved_value = self.ml_model.resolve_conflict(
+                    field, 
+                    field_data, 
+                    [self.trust_scores.get_score(s.source_id) for s in data_sources]
+                )
+                consensus_data[field] = resolved_value
+        
+        return {
+            'consensus': consensus_data,
+            'conflicts': conflicts,
+            'confidence': self.calculate_confidence_score(consensus_data, conflicts)
+        }
+```
+
+### Mecanismos de Anclaje
+
+<Steps>
+1. **Recopilación de Datos**: Múltiples oráculos recopilan información de sus fuentes designadas
+2. **Procesamiento IA**: Procesamiento de lenguaje natural y OCR extraen datos estructurados
+3. **Validación Cruzada**: Puntos de datos son comparados entre fuentes para consistencia
+4. **Cálculo de Consenso**: Modelos ML resuelven conflictos y generan puntuaciones de confianza
+5. **Hash Criptográfico**: Datos verificados son hasheados para almacenamiento a prueba de manipulación
+6. **Anclaje On-Chain**: Hashes y resultados de consenso son escritos en contratos inteligentes
+7. **Emisión de Eventos**: Eventos blockchain disparan actualizaciones de sistemas dependientes
+</Steps>
+
+## Disparadores de Cumplimiento: Aplicación Regulatoria en Tiempo Real
+
+Cada transacción dentro de FCP atraviesa un sofisticado obstáculo de verificaciones de cumplimiento, cada una calibrada a requisitos regulatorios costarricenses y actualizada en tiempo real.
+
+### Arquitectura de Cumplimiento Dinámico
+
+<Aside type="tip">
+El cumplimiento no es una puerta estática sino un sistema vivo y respirante que se adapta a regulaciones cambiantes, datos de oráculo frescos y perfiles de riesgo evolutivos.
+</Aside>
+
+```solidity
+contract DynamicComplianceEngine {
+    struct ComplianceCheck {
+        uint256 checkId;
+        string checkType;
+        bool required;
+        uint256 maxAge; // Edad máxima de datos de oráculo
+        address[] authorizedOracles;
+    }
+    
+    mapping(string => ComplianceCheck[]) public assetClassChecks;
+    
+    function executeCompliance(
+        address user,
+        address token,
+        uint256 amount,
+        string memory operation
+    ) external returns (bool) {
+        ComplianceCheck[] memory checks = assetClassChecks[getAssetClass(token)];
+        
+        for (uint i = 0; i < checks.length; i++) {
+            if (!executeCheck(checks[i], user, token, amount, operation)) {
+                emit ComplianceFailure(user, token, checks[i].checkType);
+                return false;
+            }
+        }
+        
+        emit ComplianceSuccess(user, token, operation);
+        return true;
+    }
+    
+    function executeCheck(
+        ComplianceCheck memory check,
+        address user,
+        address token,
+        uint256 amount,
+        string memory operation
+    ) internal returns (bool) {
+        if (check.checkType == "KYC_VERIFICATION") {
+            return checkKYCCompliance(user);
+        } else if (check.checkType == "ZMT_OWNERSHIP_CAP") {
+            return checkZMTCompliance(token, user, amount);
+        } else if (check.checkType == "FOLIO_REAL_STATUS") {
+            return checkFolioRealStatus(token, check.maxAge);
+        } else if (check.checkType == "SUGEVAL_THRESHOLD") {
+            return checkSUGEVALCompliance(token, amount);
+        }
+        
+        return true;
+    }
+}
+```
+
+### Obtención de Datos en Tiempo Real
+
+Los datos de cumplimiento críticos deben ser frescos para asegurar precisión:
+
+```javascript
+class RealTimeComplianceChecker {
+    constructor() {
+        this.dataCache = new Map();
+        this.maxCacheAge = 3600; // 1 hora
+    }
+    
+    async checkZMTCompliance(tokenAddress, buyerAddress, amount) {
+        // Obtener composición de propiedad actual
+        const ownership = await this.getCurrentOwnership(tokenAddress);
+        
+        // Verificar si el comprador es extranjero
+        const buyerNationality = await this.getNationality(buyerAddress);
+        const isForeign = buyerNationality !== 'CR';
+        
+        if (!isForeign) return true; // Compradores costarricenses siempre permitidos
+        
+        // Calcular nuevo porcentaje de propiedad extranjera
+        const currentForeignOwnership = ownership.foreignPercentage;
+        const additionalPercentage = (amount / ownership.totalSupply) * 100;
+        const newForeignOwnership = currentForeignOwnership + additionalPercentage;
+        
+        return newForeignOwnership <= 49; // Límite ZMT
+    }
+    
+    async checkFolioRealStatus(tokenAddress) {
+        const cachedData = this.dataCache.get(tokenAddress);
+        
+        if (cachedData && (Date.now() - cachedData.timestamp) < this.maxCacheAge * 1000) {
+            return cachedData.status === 'VALID';
+        }
+        
+        // Obtener datos frescos de oráculos
+        const oracleData = await this.oracle.getFolioRealStatus(
+            await this.getFolioRealId(tokenAddress)
+        );
+        
+        this.dataCache.set(tokenAddress, {
+            status: oracleData.status,
+            timestamp: Date.now()
+        });
+        
+        return oracleData.status === 'VALID';
+    }
+}
+```
+
+## Integración de Atestación Notarial
+
+Los notarios sirven como el puente autorizado entre la lógica digital de FCP y los requisitos legales costarricenses, proporcionando juicio humano donde la certeza algorítmica queda corta.
+
+### Flujo de Trabajo Notarial Digital
+
+<Tabs>
+  <TabItem label="Verificación de Propiedad">
+    **Validación de Título y Registro**
+    
+    ```javascript
+    class NotaryPropertyVerification {
+        async verifyProperty(folioRealId, requestingParty) {
+            const steps = [
+                this.reviewRegistryDocuments(folioRealId),
+                this.validateTitleChain(folioRealId),
+                this.checkEncumbrances(folioRealId),
+                this.verifyOwnershipRights(folioRealId, requestingParty),
+                this.assessLegalRisks(folioRealId)
+            ];
+            
+            const results = await Promise.all(steps);
+            
+            const verification = {
+                folioRealId,
+                verified: results.every(r => r.valid),
+                issues: results.flatMap(r => r.issues || []),
+                recommendations: this.generateRecommendations(results),
+                notarySignature: await this.signVerification(results),
+                timestamp: Date.now()
+            };
+            
+            // Enviar a blockchain
+            await this.submitVerification(verification);
+            
+            return verification;
+        }
+    }
+    ```
+  </TabItem>
+  
+  <TabItem label="Autorización de Transacciones">
+    **Aprobación de Escrow y Transferencia**
+    
+    Los notarios revisan y autorizan transacciones críticas:
+    
+    - Transferencia de derechos de propiedad tokenizados
+    - Liberación de escrow para ventas completadas
+    - Resolución de disputas y congelamiento de activos
+    - Aprobaciones de inversión transfronteriza
+  </TabItem>
+  
+  <TabItem label="Interpretación Legal">
+    **Evaluación de Cumplimiento Regulatorio**
+    
+    Cuando las regulaciones son ambiguas o están evolucionando, los notarios proporcionan interpretación legal autorizada que cierra la brecha entre estatuto y lógica de contrato inteligente.
+  </TabItem>
+</Tabs>
+
+### Integración de Flujo de Trabajo de Atestación
+
+<Steps>
+1. **Inicio de Solicitud**: Usuario o sistema dispara necesidad de revisión notarial
+2. **Compilación de Documentos**: Todos los documentos legales relevantes son recopilados y presentados
+3. **Revisión Notarial**: Notario credencializado examina documentos y estado legal
+4. **Atestación Digital**: Notario crea atestación firmada criptográficamente
+5. **Anclaje Blockchain**: Sistema de oráculo valida y ancla atestación
+6. **Actualización de Contrato Inteligente**: Contratos actualizan estado basado en aprobación notarial
+7. **Archivo Legal**: Registros físicos y digitales mantenidos para admisibilidad en tribunal
+</Steps>
+
+<Aside type="caution">
+Cada acto notarial crea registros duales—atestaciones digitales para integración blockchain y archivos físicos para requisitos legales costarricenses.
+</Aside>
+
+## Sincronización de Eventos: Traza de Auditoría Unificada
+
+FCP mantiene sincronización perfecta entre estados on-chain y off-chain mediante sistemas completos de registro y monitoreo de eventos.
+
+### Arquitectura de Eventos
+
+```javascript
+class UnifiedEventBus {
+    constructor() {
+        this.blockchainListener = new BlockchainEventListener();
+        this.oracleListener = new OracleEventListener();
+        this.notaryListener = new NotaryEventListener();
+        this.subscribers = new Map();
+    }
+    
+    async startListening() {
+        // Eventos blockchain
+        this.blockchainListener.on('TokenTransfer', (event) => {
+            this.processEvent('blockchain', 'transfer', event);
+        });
+        
+        this.blockchainListener.on('ComplianceCheck', (event) => {
+            this.processEvent('blockchain', 'compliance', event);
+        });
+        
+        // Eventos de oráculo
+        this.oracleListener.on('RegistryUpdate', (event) => {
+            this.processEvent('oracle', 'registry_update', event);
+        });
+        
+        // Eventos notariales
+        this.notaryListener.on('AttestationSubmitted', (event) => {
+            this.processEvent('notary', 'attestation', event);
+        });
+    }
+    
+    processEvent(source, type, event) {
+        const unifiedEvent = {
+            id: generateEventId(),
+            source,
+            type,
+            timestamp: Date.now(),
+            data: event,
+            processed: false
+        };
+        
+        // Almacenar en registro de auditoría
+        this.auditLog.store(unifiedEvent);
+        
+        // Notificar suscriptores
+        this.notifySubscribers(unifiedEvent);
+        
+        // Verificar disparadores de reacción requeridos
+        this.checkReactionTriggers(unifiedEvent);
+    }
+}
+```
+
+### Verificación de Consistencia
+
+El sistema verifica continuamente que los estados on-chain y off-chain permanezcan sincronizados:
+
+```javascript
+class ConsistencyVerifier {
+    async verifySystemConsistency() {
+        const blockchainState = await this.getBlockchainState();
+        const oracleState = await this.getOracleState();
+        const notaryState = await this.getNotaryState();
+        
+        const inconsistencies = [];
+        
+        // Verificar cada activo para consistencia
+        for (const asset of blockchainState.assets) {
+            const oracleData = oracleState.assets.find(a => a.folioRealId === asset.folioRealId);
+            const notaryData = notaryState.assets.find(a => a.folioRealId === asset.folioRealId);
+            
+            if (!this.dataConsistent(asset, oracleData, notaryData)) {
+                inconsistencies.push({
+                    folioRealId: asset.folioRealId,
+                    blockchainState: asset,
+                    oracleState: oracleData,
+                    notaryState: notaryData
+                });
+            }
+        }
+        
+        if (inconsistencies.length > 0) {
+            await this.handleInconsistencies(inconsistencies);
+        }
+        
+        return {
+            consistent: inconsistencies.length === 0,
+            inconsistencies
+        };
+    }
+}
+```
+
+## Consistencia de Datos y Ejecutabilidad Legal
+
+<Aside type="note">
+El propósito último de la capa de integración es asegurar que cada token digital mantenga fidelidad perfecta a su realidad legal subyacente, creando activos que son simultáneamente nativos de blockchain y ejecutables en tribunal.
+</Aside>
+
+### Validación Multi-Capa
+
+La consistencia de datos se mantiene mediante múltiples capas de validación:
+
+1. **Consenso de Oráculo**: Múltiples oráculos independientes deben acordar en datos críticos
+2. **Atestación Notarial**: Expertos legales humanos validan interpretaciones complejas
+3. **Verificación de Contrato Inteligente**: La lógica on-chain aplica reglas de consistencia
+4. **Mantenimiento de Traza de Auditoría**: Historial completo permite rollback y análisis forense
+5. **Integración de Archivo Legal**: Registros físicos mantenidos para procedimientos judiciales
+
+### Marco de Resolución de Disputas
+
+Cuando surgen inconsistencias, el sistema sigue un proceso estructurado de resolución:
+
+<Steps>
+1. **Detección Automática**: Sistemas de IA identifican discrepancias entre fuentes de datos
+2. **Congelamiento de Activos**: Tokens afectados son pausados inmediatamente para prevenir transacciones inválidas
+3. **Recopilación de Evidencia**: Todas las fuentes de datos conflictivas son compiladas y analizadas
+4. **Revisión Experta**: Notarios calificados y expertos legales evalúan la situación
+5. **Decisión de Gobernanza**: DAO o autoridades designadas toman resolución vinculante
+6. **Actualización del Sistema**: Datos corregidos se propagan a través de todos los componentes del sistema
+7. **Descongelamiento de Activos**: Tokens resueltos son retornados a operación normal
+</Steps>
+
+### Mecanismos de Ejecutabilidad Legal
+
+La capa de integración asegura admisibilidad en tribunal mediante:
+
+- **Prueba Criptográfica**: Registros a prueba de manipulación con verificación matemática
+- **Atestación Notarial**: Testigos humanos proporcionando credibilidad legal
+- **Cadena de Custodia**: Documentación completa del flujo de datos desde fuente a blockchain
+- **Testimonio Experto**: Documentación técnica adecuada para procedimientos legales
+- **Cumplimiento Regulatorio**: Adhesión a todas las reglas de evidencia y procedimiento costarricenses
+
+## Conclusión: El Puente Vivo
+
+En el Protocolo FolioChain, la capa de integración trasciende la mera plomería técnica—representa el puente vivo entre los reinos digital y legal. Mediante su sofisticada orquestación de oráculos, disparadores de cumplimiento, atestaciones notariales y sincronización de eventos, FCP asegura que cada activo tokenizado lleve el peso completo de autoridad legal mientras abraza la transparencia y eficiencia de la tecnología blockchain.
+
+Esta capa de integración hace posible un nuevo paradigma donde los bienes raíces costarricenses pueden ser tokenizados fluídamente, comerciados transparentemente y ejecutados legalmente—abriendo puertas a inversión inclusiva, cumplimiento automatizado y gobernanza sin confianza mientras nunca compromete las protecciones legales que hacen significativa la propiedad de activos.
