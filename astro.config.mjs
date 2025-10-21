@@ -1,12 +1,10 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
-// https://astro.build/config
+// https://astro.build/config  
 export default defineConfig({
 	site: 'https://elwizard33.github.io',
 	base: '/foliochain-docs',
-	trailingSlash: 'ignore',
-	outDir: './dist',
 	integrations: [
 		starlight({
 			title: 'FolioChain Protocol',
