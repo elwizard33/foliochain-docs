@@ -3,14 +3,25 @@ title: Introducción
 description: La evolución global de la tokenización RWA y el panorama único del mercado costarricense
 ---
 
-import { Tabs, TabItem, Aside } from '@astrojs/starlight/components';
+import { Tabs, TabItem, Aside, Card, CardGrid } from '@astrojs/starlight/components';
 
 ## La Evolución Global de la Tokenización de Activos del Mundo Real
 
 La alquimia digital de la tokenización de activos del mundo real (RWA) ha, durante la última década, transfigurado los contornos de las finanzas globales. Lo que comenzó como un experimento especulativo—anclando la promesa intangible de blockchain a la solidez tangible de activos físicos—ha madurado en un movimiento de trillones de dólares.
 
+<div style="display: flex; justify-content: center; gap: 2rem; margin: 2rem 0; flex-wrap: wrap;">
+  <div style="text-align: center; padding: 1.5rem 2.5rem; background: linear-gradient(135deg, rgba(79, 70, 229, 0.1), rgba(6, 182, 212, 0.1)); border-radius: 12px; border: 2px solid rgba(79, 70, 229, 0.3); min-width: 200px;">
+    <div style="font-size: 2.5rem; font-weight: 700; background: linear-gradient(135deg, #4f46e5, #06b6d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">$50B+</div>
+    <div style="color: var(--sl-color-gray-3); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.5rem; font-size: 0.85rem;">RWAs Tokenizados (2025)</div>
+  </div>
+  <div style="text-align: center; padding: 1.5rem 2.5rem; background: linear-gradient(135deg, rgba(79, 70, 229, 0.1), rgba(6, 182, 212, 0.1)); border-radius: 12px; border: 2px solid rgba(79, 70, 229, 0.3); min-width: 200px;">
+    <div style="font-size: 2.5rem; font-weight: 700; background: linear-gradient(135deg, #4f46e5, #06b6d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">$1T+</div>
+    <div style="color: var(--sl-color-gray-3); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.5rem; font-size: 0.85rem;">Potencial de Mercado</div>
+  </div>
+</div>
+
 <Aside type="note">
-A partir de 2025, más de $50 mil millones en RWAs—abarcando bienes raíces, commodities y activos alternativos—han sido tokenizados, con una adopción institucional acelerada a medida que emerge claridad regulatoria.
+A partir de 2025, la adopción institucional se está acelerando a medida que emerge claridad regulatoria en las principales jurisdicciones.
 </Aside>
 
 Desde rascacielos en Manhattan hasta viñedos de Burdeos, desde reservas de oro hasta créditos de carbono, los activos más codiciados del mundo están siendo destilados en tokens criptográficos: divisibles, programables y sin fronteras. Esta metamorfosis promete fracturar el lecho de iliquidez, opacidad y exclusividad que ha definido durante mucho tiempo los mercados tradicionales de activos.
@@ -19,16 +30,35 @@ Desde rascacielos en Manhattan hasta viñedos de Burdeos, desde reservas de oro 
 
 En su núcleo, la tokenización de RWA es el proceso mediante el cual los derechos, reclamaciones o intereses económicos en un activo físico se representan como tokens digitales en una blockchain. Estos tokens pueden ser:
 
-- **Comprados y vendidos** en mercados secundarios
-- **Usados como colateral** en protocolos DeFi
-- **Fraccionalizados** para micro-inversiones
-- **Programados** con reglas de cumplimiento y gobernanza
+<CardGrid stagger>
+  <Card title="🔄 Activos Comercializables" icon="seti:clock">
+    **Comprados y vendidos** en mercados secundarios con liquidez 24/7 y descubrimiento transparente de precios
+  </Card>
+  <Card title="💎 Colateral DeFi" icon="puzzle">
+    **Usados como colateral** en protocolos DeFi, desbloqueando eficiencia de capital y oportunidades de rendimiento
+  </Card>
+  <Card title="📊 Propiedad Fraccionada" icon="open-book">
+    **Fraccionalizados** para micro-inversiones, permitiendo acceso democratizado a activos premium
+  </Card>
+  <Card title="⚙️ Cumplimiento Programable" icon="setting">
+    **Programados** con reglas de cumplimiento y gobernanza integradas directamente en contratos inteligentes
+  </Card>
+</CardGrid>
 
+<Aside type="tip">
 El ascenso global de estándares como **ERC-3643 (T-REX)** y **ERC-1155** ha catalizado esta transformación, permitiendo marcos de tokenización autorizados, compatibles y multi-clase.
+</Aside>
 
 ## El Panorama Inmobiliario Costarricense
 
 Costa Rica, una nación de poco más de cinco millones, comanda una presencia desmedida en la imaginación de inversores y conservacionistas por igual. Su mercado inmobiliario, estimado en más de $100 mil millones en valor agregado, es un mosaico de clases de activos distintivas.
+
+<div style="text-align: center; margin: 2rem 0;">
+  <div style="display: inline-block; padding: 1.5rem 3rem; background: linear-gradient(135deg, rgba(79, 70, 229, 0.1), rgba(6, 182, 212, 0.1)); border-radius: 12px; border: 2px solid rgba(79, 70, 229, 0.3);">
+    <div style="font-size: 3rem; font-weight: 700; background: linear-gradient(135deg, #4f46e5, #06b6d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">$100B+</div>
+    <div style="color: var(--sl-color-gray-3); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.5rem;">Mercado Inmobiliario Costarricense</div>
+  </div>
+</div>
 
 <Tabs>
   <TabItem label="Propiedades en Zona Marítima">
@@ -64,40 +94,39 @@ Costa Rica, una nación de poco más de cinco millones, comanda una presencia de
 
 A pesar de su riqueza natural y económica, el sector inmobiliario de Costa Rica enfrenta desafíos endémicos que el Protocolo FolioChain está diseñado para abordar:
 
-### Disputas de Títulos y Problemas de Registro
+<div style="text-align: center; margin: 1.5rem 0;">
+  <div style="display: inline-block; padding: 1rem 2rem; background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(245, 158, 11, 0.1)); border-radius: 12px; border: 2px solid rgba(239, 68, 68, 0.3);">
+    <div style="font-size: 2.5rem; font-weight: 700; color: #ef4444;">~20%</div>
+    <div style="color: var(--sl-color-gray-3); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.5rem; font-size: 0.85rem;">Títulos de Propiedad con Disputas</div>
+  </div>
+</div>
 
-<Aside type="caution">
-Se estima que hasta el 20% de los títulos de propiedad están gravados por disputas, reclamaciones superpuestas o registros incompletos.
-</Aside>
-
-- **Mantenimiento de Registros Analógicos**: El Registro Nacional mantiene registros oficiales pero los procesos son en gran medida manuales
-- **Acceso Digital Limitado**: Existen portales web pero no hay APIs públicas disponibles para verificación automatizada
-- **Documentación Fragmentada**: Información crítica dispersa entre múltiples agencias y notarías
-
-### Restricciones de Propiedad Extranjera
-
-Particularmente agudas en la Zona Marítimo Terrestre, estas restricciones son:
-
-- **Rigurosamente Aplicadas**: Sin embargo difíciles de rastrear en la práctica
-- **Estructuras Complejas**: Prevalencia de propiedad indirecta y arreglos nominales
-- **Carga de Cumplimiento**: Procesos de verificación manual para cada transacción
-
-### Déficit de Infraestructura Digital
-
-La ausencia de interfaces programáticas crea una fricción significativa:
-
-- **Sin Acceso API**: No se puede automatizar due diligence o procesos de transferencia
-- **Cuellos de Botella Notariales**: Gran dependencia de intermediarios humanos
-- **Brechas de Transparencia**: Visibilidad limitada en estructuras de propiedad y estado de cumplimiento
-
-### Regímenes de Cumplimiento Fragmentados
-
-Múltiples agencias imponen requisitos superpuestos:
-
-- **SUGEVAL**: Ofertas de valores y protección al inversor
-- **SUGEF**: Requisitos contra lavado de dinero y conozca a su cliente
-- **Ministerio de Hacienda**: Obligaciones fiscales y retención
-- **Registro Nacional**: Derechos de propiedad y transferencias de títulos
+<CardGrid stagger>
+  <Card title="📋 Disputas de Títulos y Problemas de Registro" icon="warning">
+    - **Mantenimiento Analógico**: Procesos manuales en el Registro Nacional
+    - **Acceso Digital Limitado**: No hay APIs públicas para verificación automatizada
+    - **Documentación Fragmentada**: Información dispersa entre agencias y notarías
+  </Card>
+  
+  <Card title="🚫 Restricciones de Propiedad Extranjera" icon="error">
+    - **Rigurosamente Aplicadas**: Difíciles de rastrear en Zona Marítimo Terrestre
+    - **Estructuras Complejas**: Propiedad indirecta y arreglos nominales
+    - **Carga de Cumplimiento**: Verificación manual para cada transacción
+  </Card>
+  
+  <Card title="🔌 Déficit de Infraestructura Digital" icon="puzzle">
+    - **Sin Acceso API**: No se puede automatizar due diligence o transferencias
+    - **Cuellos de Botella Notariales**: Gran dependencia de intermediarios humanos
+    - **Brechas de Transparencia**: Visibilidad limitada en estructuras de propiedad
+  </Card>
+  
+  <Card title="⚖️ Regímenes de Cumplimiento Fragmentados" icon="list-format">
+    - **SUGEVAL**: Ofertas de valores y protección al inversor
+    - **SUGEF**: Requisitos contra lavado de dinero y KYC
+    - **Ministerio de Hacienda**: Obligaciones fiscales y retención
+    - **Registro Nacional**: Derechos de propiedad y transferencias de títulos
+  </Card>
+</CardGrid>
 
 ## El Entorno Regulatorio
 
@@ -122,9 +151,17 @@ El panorama regulatorio de Costa Rica a octubre de 2025 presenta tanto oportunid
 
 Cada agencia mantiene responsabilidades de supervisión distintas:
 
-- **SUGEVAL**: Umbrales de valores, requisitos de prospecto, acreditación de inversores
-- **SUGEF**: Due diligence basado en riesgo, identificación de beneficiarios reales
-- **Registro Nacional**: Autenticidad de títulos, autorización de transferencias, registro de gravámenes
+<CardGrid>
+  <Card title="📊 SUGEVAL" icon="approve-check">
+    Umbrales de valores, requisitos de prospecto y supervisión de acreditación de inversores
+  </Card>
+  <Card title="🛡️ SUGEF" icon="shield">
+    Due diligence basado en riesgo e identificación de beneficiarios reales para seguridad financiera
+  </Card>
+  <Card title="📝 Registro Nacional" icon="document">
+    Verificación de autenticidad de títulos, autorización de transferencias y registro de gravámenes
+  </Card>
+</CardGrid>
 
 ## El Imperativo del Protocolo FolioChain
 

@@ -3,14 +3,25 @@ title: Introduction
 description: The global evolution of RWA tokenization and Costa Rica's unique market landscape
 ---
 
-import { Tabs, TabItem, Aside } from '@astrojs/starlight/components';
+import { Tabs, TabItem, Aside, Card, CardGrid } from '@astrojs/starlight/components';
 
 ## The Global Evolution of Real-World Asset Tokenization
 
 The digital alchemy of real-world asset (RWA) tokenization has, over the past decade, transfigured the contours of global finance. What began as a speculative experiment—anchoring the intangible promise of blockchain to the tangible solidity of physical assets—has matured into a trillion-dollar movement.
 
+<div style="display: flex; justify-content: center; gap: 2rem; margin: 2rem 0; flex-wrap: wrap;">
+  <div style="text-align: center; padding: 1.5rem 2.5rem; background: linear-gradient(135deg, rgba(79, 70, 229, 0.1), rgba(6, 182, 212, 0.1)); border-radius: 12px; border: 2px solid rgba(79, 70, 229, 0.3); min-width: 200px;">
+    <div style="font-size: 2.5rem; font-weight: 700; background: linear-gradient(135deg, #4f46e5, #06b6d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">$50B+</div>
+    <div style="color: var(--sl-color-gray-3); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.5rem; font-size: 0.85rem;">RWAs Tokenized (2025)</div>
+  </div>
+  <div style="text-align: center; padding: 1.5rem 2.5rem; background: linear-gradient(135deg, rgba(79, 70, 229, 0.1), rgba(6, 182, 212, 0.1)); border-radius: 12px; border: 2px solid rgba(79, 70, 229, 0.3); min-width: 200px;">
+    <div style="font-size: 2.5rem; font-weight: 700; background: linear-gradient(135deg, #4f46e5, #06b6d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">$1T+</div>
+    <div style="color: var(--sl-color-gray-3); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.5rem; font-size: 0.85rem;">Market Potential</div>
+  </div>
+</div>
+
 <Aside type="note">
-As of 2025, over $50 billion in RWAs—spanning real estate, commodities, and alternative assets—have been tokenized, with institutional adoption accelerating as regulatory clarity emerges.
+As of 2025, institutional adoption is accelerating as regulatory clarity emerges across major jurisdictions.
 </Aside>
 
 From Manhattan skyscrapers to Bordeaux vineyards, from gold reserves to carbon credits, the world's most coveted assets are being distilled into cryptographic tokens: divisible, programmable, and borderless. This metamorphosis promises to fracture the bedrock of illiquidity, opacity, and exclusivity that has long defined traditional asset markets.
@@ -19,16 +30,35 @@ From Manhattan skyscrapers to Bordeaux vineyards, from gold reserves to carbon c
 
 At its core, RWA tokenization is the process by which the rights, claims, or economic interests in a physical asset are represented as digital tokens on a blockchain. These tokens can be:
 
-- **Bought and sold** on secondary markets
-- **Used as collateral** in DeFi protocols  
-- **Fractionalized** for micro-investments
-- **Programmed** with compliance and governance rules
+<CardGrid stagger>
+  <Card title="🔄 Tradeable Assets" icon="seti:clock">
+    **Bought and sold** on secondary markets with 24/7 liquidity and transparent price discovery
+  </Card>
+  <Card title="💎 DeFi Collateral" icon="puzzle">
+    **Used as collateral** in DeFi protocols, unlocking capital efficiency and yield opportunities
+  </Card>
+  <Card title="📊 Fractionalized Ownership" icon="open-book">
+    **Fractionalized** for micro-investments, enabling democratized access to premium assets
+  </Card>
+  <Card title="⚙️ Programmable Compliance" icon="setting">
+    **Programmed** with compliance and governance rules embedded directly in smart contracts
+  </Card>
+</CardGrid>
 
+<Aside type="tip">
 The global ascent of standards such as **ERC-3643 (T-REX)** and **ERC-1155** has catalyzed this transformation, enabling permissioned, compliant, and multi-class tokenization frameworks.
+</Aside>
 
 ## The Costa Rican Real Estate Landscape
 
 Costa Rica, a nation of just over five million, commands an outsized presence in the imagination of investors and conservationists alike. Its real estate market, estimated at over $100 billion in aggregate value, is a mosaic of distinctive asset classes.
+
+<div style="text-align: center; margin: 2rem 0;">
+  <div style="display: inline-block; padding: 1.5rem 3rem; background: linear-gradient(135deg, rgba(79, 70, 229, 0.1), rgba(6, 182, 212, 0.1)); border-radius: 12px; border: 2px solid rgba(79, 70, 229, 0.3);">
+    <div style="font-size: 3rem; font-weight: 700; background: linear-gradient(135deg, #4f46e5, #06b6d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">$100B+</div>
+    <div style="color: var(--sl-color-gray-3); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.5rem;">Costa Rican Real Estate Market</div>
+  </div>
+</div>
 
 <Tabs>
   <TabItem label="Maritime Zone Properties">
@@ -64,40 +94,39 @@ Costa Rica, a nation of just over five million, commands an outsized presence in
 
 Despite its natural and economic bounty, Costa Rica's real estate sector faces endemic challenges that FolioChain Protocol is designed to address:
 
-### Title Disputes and Registry Issues
+<div style="text-align: center; margin: 1.5rem 0;">
+  <div style="display: inline-block; padding: 1rem 2rem; background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(245, 158, 11, 0.1)); border-radius: 12px; border: 2px solid rgba(239, 68, 68, 0.3);">
+    <div style="font-size: 2.5rem; font-weight: 700; color: #ef4444;">~20%</div>
+    <div style="color: var(--sl-color-gray-3); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.5rem; font-size: 0.85rem;">Property Titles with Disputes</div>
+  </div>
+</div>
 
-<Aside type="caution">
-Up to 20% of property titles are estimated to be encumbered by disputes, overlapping claims, or incomplete records.
-</Aside>
-
-- **Analog Record-Keeping**: The National Registry (Registro Nacional) maintains official records but processes are largely manual
-- **Limited Digital Access**: Web portals exist but no public APIs are available for automated verification
-- **Fragmented Documentation**: Critical information scattered across multiple agencies and notaries
-
-### Foreign Ownership Restrictions
-
-Particularly acute in the Maritime Terrestrial Zone, these restrictions are:
-
-- **Rigorously Enforced**: Yet difficult to track in practice
-- **Complex Structures**: Prevalence of indirect ownership and nominee arrangements
-- **Compliance Burden**: Manual verification processes for each transaction
-
-### Digital Infrastructure Deficit
-
-The absence of programmatic interfaces creates significant friction:
-
-- **No API Access**: Cannot automate due diligence or transfer processes
-- **Notarial Bottlenecks**: Heavy reliance on human intermediaries
-- **Transparency Gaps**: Limited visibility into ownership structures and compliance status
-
-### Fragmented Compliance Regimes
-
-Multiple agencies impose overlapping requirements:
-
-- **SUGEVAL**: Securities offerings and investor protection
-- **SUGEF**: Anti-money laundering and know-your-customer requirements  
-- **Ministry of Finance**: Tax obligations and withholding
-- **National Registry**: Property rights and title transfers
+<CardGrid stagger>
+  <Card title="📋 Title Disputes & Registry Issues" icon="warning">
+    - **Analog Record-Keeping**: Manual processes at National Registry (Registro Nacional)
+    - **Limited Digital Access**: No public APIs for automated verification
+    - **Fragmented Documentation**: Information scattered across agencies and notaries
+  </Card>
+  
+  <Card title="🚫 Foreign Ownership Restrictions" icon="error">
+    - **Rigorously Enforced**: Difficult to track in Maritime Terrestrial Zone
+    - **Complex Structures**: Indirect ownership and nominee arrangements
+    - **Compliance Burden**: Manual verification for each transaction
+  </Card>
+  
+  <Card title="🔌 Digital Infrastructure Deficit" icon="puzzle">
+    - **No API Access**: Cannot automate due diligence or transfers
+    - **Notarial Bottlenecks**: Heavy reliance on human intermediaries
+    - **Transparency Gaps**: Limited visibility into ownership structures
+  </Card>
+  
+  <Card title="⚖️ Fragmented Compliance Regimes" icon="list-format">
+    - **SUGEVAL**: Securities offerings and investor protection
+    - **SUGEF**: Anti-money laundering and KYC requirements
+    - **Ministry of Finance**: Tax obligations and withholding
+    - **National Registry**: Property rights and title transfers
+  </Card>
+</CardGrid>
 
 ## The Regulatory Environment
 
@@ -122,9 +151,17 @@ Costa Rica's regulatory landscape as of October 2025 presents both opportunities
 
 Each agency maintains distinct oversight responsibilities:
 
-- **SUGEVAL**: Securities thresholds, prospectus requirements, investor accreditation
-- **SUGEF**: Risk-based due diligence, beneficial ownership identification
-- **National Registry**: Title authenticity, transfer authorization, encumbrance recording
+<CardGrid>
+  <Card title="📊 SUGEVAL" icon="approve-check">
+    Securities thresholds, prospectus requirements, and investor accreditation oversight
+  </Card>
+  <Card title="🛡️ SUGEF" icon="shield">
+    Risk-based due diligence and beneficial ownership identification for financial security
+  </Card>
+  <Card title="📝 National Registry" icon="document">
+    Title authenticity verification, transfer authorization, and encumbrance recording
+  </Card>
+</CardGrid>
 
 ## The Imperative for FolioChain Protocol
 
