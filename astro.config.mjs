@@ -3,8 +3,7 @@ import starlight from '@astrojs/starlight';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://elwizard33.github.io',
-	base: '/foliochain-docs',
+	site: 'https://elwizard33.github.io/foliochain-docs',
 	integrations: [
 		starlight({
 			title: 'FolioChain Protocol',
@@ -12,8 +11,9 @@ export default defineConfig({
 			logo: {
 				src: './src/assets/logo.svg',
 			},
+			favicon: '/favicon.svg',
 			social: {
-				github: 'https://github.com/foliochain/protocol',
+				github: 'https://github.com/elwizard33/foliochain-docs',
 			},
 			sidebar: [
 				{
