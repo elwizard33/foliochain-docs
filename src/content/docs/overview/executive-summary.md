@@ -3,7 +3,6 @@ title: Executive Summary
 description: An overview of FolioChain Protocol's vision and transformative approach to Costa Rican real estate tokenization
 ---
 
-import { Aside } from '@astrojs/starlight/components';
 
 In the lush heart of Central America, where rainforests meet the Pacific and Caribbean coasts, Costa Rica stands poised at the threshold of a new economic epoch. The FolioChain Protocol (FCP) emerges as the vanguard of this transformation, reimagining access, transparency, and trust in the realm of real-world asset (RWA) tokenization.
 

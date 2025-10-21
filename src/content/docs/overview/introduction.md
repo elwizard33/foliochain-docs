@@ -3,8 +3,6 @@ title: Introduction
 description: The global evolution of RWA tokenization and Costa Rica's unique market landscape
 ---
 
-import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
-
 ## The Global Evolution of Real-World Asset Tokenization
 
 The digital alchemy of real-world asset (RWA) tokenization has, over the past decade, transfigured the contours of global finance. What began as a speculative experiment—anchoring the intangible promise of blockchain to the tangible solidity of physical assets—has matured into a trillion-dollar movement.

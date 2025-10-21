@@ -3,7 +3,6 @@ title: Integration Layers
 description: The living bridge between code and court, orchestrating seamless data flows and legal enforceability
 ---
 
-import { Aside, Steps, Tabs, TabItem } from '@astrojs/starlight/components';
 
 Where law is written in ink and code in logic gates, the FolioChain Protocol's integration layer stands as the living bridge—an intricate choreography of protocols, signals, and attestations that transmute the analog pulse of Costa Rican property markets into the crystalline certainties of blockchain. Here, the hybrid soul of FCP is revealed: neither wholly digital nor stubbornly analog, but a symphony of both, orchestrated to ensure that every on-chain action is rooted in real-world truth.
 

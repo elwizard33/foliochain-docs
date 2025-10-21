@@ -3,7 +3,6 @@ title: Scalability & Tech Stack
 description: Engineering for growth, compliance, and resilience in the Costa Rican market
 ---
 
-import { Aside, Card, CardGrid, Tabs, TabItem, Steps } from '@astrojs/starlight/components';
 
 Beneath the elegant choreography of FolioChain Protocol's legal and compliance logic lies an infrastructure as deliberate as it is dynamic—a technical substratum engineered to scale, adapt, and endure amidst the shifting tectonics of Costa Rican law and global asset markets. Here, every architectural decision is a wager on the future: a commitment to inclusivity, auditability, and the unyielding demands of both code and court.
 

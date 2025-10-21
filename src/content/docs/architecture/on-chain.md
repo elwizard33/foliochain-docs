@@ -3,7 +3,6 @@ title: On-Chain Components
 description: Smart contract architecture and the living logic of Costa Rican asset tokenization
 ---
 
-import { Aside, Code, Tabs, TabItem } from '@astrojs/starlight/components';
 
 Beneath the elegant surface of FolioChain Protocol, a latticework of smart contracts pulses with deterministic precision—each contract a digital magistrate, each function a clause in the living constitution of Costa Rican asset tokenization. Here, code is not mere machinery but jurisprudence: a system of enforceable, auditable, and ever-adaptable rules, inscribed in Solidity and shaped by the shifting tides of local law.
 

@@ -3,7 +3,6 @@ title: Off-Chain Components
 description: The intelligent bridge between law and ledger, powered by AI oracles and decentralized storage
 ---
 
-import { Aside, Code, Tabs, TabItem, Steps } from '@astrojs/starlight/components';
 
 The FolioChain Protocol's off-chain architecture serves as the sinew and synapse that binds the deterministic certainty of blockchain to the mutable, analog realities of Costa Rican property law and market practice. Here, intelligence is not merely artificial but adaptive—an ensemble of AI-powered oracles, decentralized storage, user-centric interfaces, and notarial partnerships, each engineered to resolve the frictions of a jurisdiction where digital and legal worlds remain stubbornly apart.
 
