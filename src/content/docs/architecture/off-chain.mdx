@@ -35,254 +35,172 @@ Traditional blockchain oracles are reactive data feeds: they wait for queries, f
 
 <Tabs>
   <TabItem label="Perception Layer">
-    **Environmental Awareness**
+    **Environmental Awareness - The Agent's Eyes and Ears**
     
-    Agents continuously monitor multiple data streams:
+    Think of this as the agent's sensory system—constantly watching and listening to what's happening across Costa Rica's real estate ecosystem.
     
-    ```python
-    class PerceptionEngine:
-        def __init__(self):
-            self.monitors = [
-                RegistryMonitor(),
-                BlockchainEventMonitor(),
-                RegulatoryFeedMonitor(),
-                NotaryAttestationMonitor(),
-                MarketDataMonitor()
-            ]
-        
-        async def perceive_changes(self):
-            while True:
-                events = await self.gather_all_events()
-                
-                # Filter significant events
-                significant = self.filter_significance(events)
-                
-                # Enrich with context
-                enriched = await self.enrich_context(significant)
-                
-                # Route to reasoning engine
-                for event in enriched:
-                    await self.reasoning_engine.process(event)
-    ```
+    **What the Agent Monitors 24/7:**
     
-    **Key Capabilities:**
-    - Real-time National Registry scraping with change detection
-    - Blockchain event listening for on-chain state changes
-    - Regulatory feed parsing for law and policy updates
-    - Market sentiment analysis from trading activity
-    - Notary attestation ingestion with cryptographic verification
+    - **National Registry Changes**: Detects when property titles are updated, liens are released, or ownership transfers occur
+    - **Blockchain Activity**: Watches every transaction, token transfer, and smart contract event in real-time
+    - **Regulatory Updates**: Tracks when SUGEVAL, SUGEF, or other agencies publish new rules or guidance
+    - **Market Signals**: Analyzes trading patterns, price movements, and investor behavior
+    - **Notary Actions**: Receives notifications when notaries submit new property attestations
+    
+    **How It Works:**
+    
+    The agent continuously scans multiple data sources simultaneously, filtering out noise to focus on significant events. When something important happens—like a property becoming available for tokenization or a regulatory change affecting compliance—the agent immediately flags it and enriches it with additional context before passing it to the reasoning engine.
+    
+    **Real-World Example:**
+    
+    At 3 AM, the National Registry updates showing a beachfront property's mortgage lien has been released. The agent detects this change instantly, retrieves the property's full history, identifies the owner, and prepares a complete analysis—all before anyone wakes up.
   </TabItem>
   
   <TabItem label="Reasoning Engine">
-    **LLM-Powered Decision Making**
+    **Intelligent Decision Making - The Agent's Brain**
     
-    Agents use large language models fine-tuned on Costa Rican legal corpus:
+    This is where the agent thinks through complex situations using AI trained specifically on Costa Rican real estate law and regulations.
     
-    ```python
-    class AgenticReasoningEngine:
-        def __init__(self):
-            self.llm = self.load_legal_llm("cr-compliance-v3")
-            self.knowledge_base = CostaRicaLegalKnowledgeBase()
-        
-        async def reason(self, event, context):
-            # Construct reasoning prompt with legal context
-            prompt = f"""
-            Event: {event.description}
-            Property: {event.folio_real_id}
-            Current State: {context.current_state}
-            Legal Framework: {self.knowledge_base.get_relevant_laws(event)}
-            
-            Question: What is the optimal action to take?
-            Consider:
-            1. SUGEVAL securities compliance
-            2. SUGEF KYC/AML requirements
-            3. ZMT foreign ownership caps
-            4. Hacienda tax obligations
-            5. Investor value maximization
-            
-            Response Format:
-            - Recommended Action: [action]
-            - Legal Justification: [reasoning]
-            - Risk Assessment: [low/medium/high]
-            - Alternative Strategies: [fallbacks]
-            """
-            
-            # Get LLM recommendation
-            response = await self.llm.generate(prompt)
-            
-            # Validate against hard rules
-            validated = self.validate_compliance(response)
-            
-            return validated
-    ```
+    **How the Agent Reasons:**
     
-    **Decision Contexts:**
-    - When to initiate property tokenization
-    - How to optimize compliance for edge cases
-    - Whether to escalate to human review
-    - How to route trades through compliant pathways
-    - When to pause tokens due to legal risks
+    When the agent encounters a situation, it doesn't just follow rigid rules—it analyzes the legal context, considers multiple options, and determines the best path forward. The AI has been trained on thousands of Costa Rican legal documents, regulatory filings, and property transactions.
+    
+    **What the Agent Considers:**
+    
+    1. **Legal Requirements**: SUGEVAL securities laws, SUGEF anti-money laundering rules, ZMT foreign ownership caps
+    2. **Business Objectives**: Fastest tokenization time, lowest costs, best investor experience
+    3. **Risk Assessment**: What could go wrong? How likely? What's the impact?
+    4. **Alternative Strategies**: If the obvious path is blocked, what other options exist?
+    5. **Historical Patterns**: What worked well in similar situations before?
+    
+    **Decision Types:**
+    
+    - Should this property be tokenized now or wait for better market conditions?
+    - Is this investor eligible, or do they need additional verification?
+    - Can this transaction proceed, or should it be modified to meet compliance requirements?
+    - Does this situation require human review, or can the agent handle it autonomously?
+    
+    **Real-World Example:**
+    
+    A foreign investor wants to buy tokens that would push foreign ownership to 52% of a maritime zone property. Instead of simply rejecting the transaction, the agent reasons: "The legal cap is 49%. This investor can buy enough tokens to reach exactly 49%, and we can queue the remainder for when other investors sell. This maximizes investor satisfaction while maintaining perfect compliance."
   </TabItem>
   
   <TabItem label="Planning Module">
-    **Multi-Step Workflow Orchestration**
+    **Strategic Planning - The Agent's Project Manager**
     
-    Agents decompose complex goals into executable action sequences:
+    Complex goals like tokenizing a property require dozens of coordinated steps. The planning module breaks these down into manageable workflows with built-in contingencies.
     
-    ```python
-    class WorkflowPlanner:
-        async def plan_tokenization(self, property_data):
-            # Define goal
-            goal = Goal(
-                objective="Tokenize property to tradeable state",
-                property=property_data,
-                constraints=self.get_legal_constraints(property_data)
-            )
-            
-            # Generate plan
-            plan = Plan([
-                Step("verify_registry_status", 
-                     preconditions=["folio_real_exists"],
-                     actions=["scrape_registry", "validate_ownership"],
-                     fallbacks=["request_notary_attestation"]),
-                     
-                Step("kyc_verification",
-                     preconditions=["owner_identified"],
-                     actions=["submit_kyc", "await_sugef_approval"],
-                     fallbacks=["manual_review_escalation"]),
-                     
-                Step("compliance_classification",
-                     preconditions=["kyc_approved"],
-                     actions=["sugeval_filing", "zmt_cap_setup"],
-                     fallbacks=["legal_counsel_consultation"]),
-                     
-                Step("smart_contract_deployment",
-                     preconditions=["all_compliance_passed"],
-                     actions=["deploy_erc3643", "mint_master_nft", "create_fractional_tokens"],
-                     fallbacks=["retry_with_gas_optimization"]),
-                     
-                Step("market_listing",
-                     preconditions=["tokens_minted"],
-                     actions=["dex_listing", "liquidity_provision"],
-                     fallbacks=["otc_marketplace"])
-            ])
-            
-            # Execute with monitoring
-            return await self.execute_plan(plan)
-    ```
+    **How the Agent Plans:**
     
-    **Planning Capabilities:**
-    - Dependency resolution across multi-step workflows
-    - Parallel execution optimization
-    - Fallback strategy selection
-    - Resource allocation (gas, time, human review)
-    - Risk-aware path selection
+    The agent takes a high-level goal (like "tokenize this property") and creates a detailed roadmap with:
+    
+    - **Sequential Steps**: What needs to happen first, second, third
+    - **Dependencies**: Step B can't start until Step A completes
+    - **Parallel Tasks**: Which steps can happen simultaneously to save time
+    - **Checkpoints**: Where to verify everything is on track
+    - **Fallback Plans**: What to do if something doesn't work as expected
+    
+    **Example Tokenization Plan:**
+    
+    **Step 1: Verify Property**
+    - Main approach: Scrape National Registry for current status
+    - Backup: Request notary to physically verify and attest
+    - Success criteria: 95%+ confidence property data is accurate
+    
+    **Step 2: Owner Verification**
+    - Main approach: Automated KYC through digital identity providers
+    - Backup: Manual document review by compliance team
+    - Success criteria: Owner identity confirmed, AML screening passed
+    
+    **Step 3: Regulatory Compliance**
+    - Main approach: Automated SUGEVAL classification and filing
+    - Backup: Legal counsel consultation for complex cases
+    - Success criteria: All regulatory approvals obtained
+    
+    **Step 4: Smart Contract Deployment**
+    - Main approach: Deploy standard ERC-3643 template
+    - Backup: Custom contract if property has unique characteristics
+    - Success criteria: Contracts deployed, tokens minted, tests passed
+    
+    **Step 5: Market Launch**
+    - Main approach: List on compliant decentralized exchange
+    - Backup: Private placement if market conditions unfavorable
+    - Success criteria: Tokens available to verified investors
+    
+    **Resource Planning:**
+    
+    The agent also budgets time, costs, and human oversight—allocating expensive human review only where truly necessary while automating routine tasks.
   </TabItem>
   
   <TabItem label="Action Execution">
-    **Smart Contract Interaction**
+    **Autonomous Execution - The Agent's Hands**
     
-    Agents directly call contract functions as authorized addresses:
+    After perceiving, reasoning, and planning, the agent takes concrete actions by directly interacting with the FolioChain smart contracts.
     
-    ```solidity
-    contract AgentAuthorizedCompliance {
-        mapping(address => bool) public authorizedAgents;
-        
-        modifier onlyAgent() {
-            require(authorizedAgents[msg.sender], "Not authorized agent");
-            _;
-        }
-        
-        function agentInitiateKYC(
-            address user,
-            bytes calldata kycData,
-            bytes calldata agentAttestation
-        ) external onlyAgent {
-            // Agent can autonomously add KYC claims
-            _verifyAgentAttestation(agentAttestation);
-            _addKYCClaim(user, kycData);
-            
-            emit AgentActionExecuted(msg.sender, "KYC_INITIATED", user);
-        }
-        
-        function agentOptimizeCompliance(
-            address token,
-            address from,
-            address to,
-            uint256 amount
-        ) external onlyAgent returns (uint256 optimizedAmount) {
-            // Agent can propose compliant alternatives
-            uint256 maxCompliant = calculateMaxCompliantTransfer(token, from, to);
-            
-            if (amount > maxCompliant) {
-                optimizedAmount = maxCompliant;
-                emit AgentComplianceOptimization(token, amount, optimizedAmount);
-            } else {
-                optimizedAmount = amount;
-            }
-            
-            return optimizedAmount;
-        }
-    }
-    ```
+    **What the Agent Can Do:**
     
-    **Action Types:**
-    - Submit KYC claims to Identity Registry
-    - Update oracle data on compliance contracts
-    - Optimize transaction amounts for ZMT compliance
-    - Trigger notary review workflows
-    - Execute yield distribution strategies
-    - Pause/unpause tokens based on risk assessment
+    Unlike traditional systems that require humans to manually execute each step, FolioChain's agents have authorized access to perform specific actions automatically:
+    
+    - **Submit Compliance Data**: Add verified KYC claims to investor identities
+    - **Update Property Information**: Record latest National Registry data on the blockchain
+    - **Optimize Transactions**: Adjust trade amounts to meet regulatory requirements
+    - **Coordinate Reviews**: Trigger notary workflows when human judgment is needed
+    - **Manage Yields**: Execute rental income distributions to token holders
+    - **Emergency Controls**: Pause tokens if disputes or legal issues arise
+    
+    **How Authorization Works:**
+    
+    Agents don't have unlimited power. Each agent is authorized for specific actions with daily limits and risk thresholds. High-value or high-risk actions require human approval, while routine tasks proceed autonomously.
+    
+    **Safety Mechanisms:**
+    
+    - **Role-Based Access**: Agents can only call functions they're explicitly authorized for
+    - **Transaction Limits**: Maximum daily transaction counts and values
+    - **Audit Trails**: Every agent action is logged with cryptographic proof
+    - **Human Override**: Oversight committees can veto or reverse agent decisions
+    - **Circuit Breakers**: Agents automatically pause if anomalies are detected
+    
+    **Real-World Example:**
+    
+    When KYC data is verified by external providers, the agent doesn't email someone to manually update the blockchain. Instead, it immediately submits the verified claim to the smart contract, cryptographically signs the attestation, and updates the investor's status—all in seconds, with complete transparency and auditability.
   </TabItem>
   
   <TabItem label="Learning System">
-    **Continuous Improvement**
+    **Continuous Improvement - The Agent Gets Smarter**
     
-    Agents learn from outcomes and human feedback:
+    Unlike static software, FolioChain's agents improve over time by learning from every action, outcome, and human intervention.
     
-    ```python
-    class AgentLearningSystem:
-        def __init__(self):
-            self.outcome_db = OutcomeDatabase()
-            self.human_feedback = HumanFeedbackCollector()
-            self.model_trainer = ModelRetrainingPipeline()
-        
-        async def learn_from_outcome(self, action, outcome):
-            # Record outcome
-            self.outcome_db.record({
-                'action': action,
-                'outcome': outcome,
-                'timestamp': time.now(),
-                'success': outcome.success,
-                'efficiency': outcome.time_to_completion,
-                'cost': outcome.gas_used
-            })
-            
-            # If human intervened, capture feedback
-            if outcome.human_intervention:
-                feedback = await self.human_feedback.collect(action, outcome)
-                self.outcome_db.add_feedback(action.id, feedback)
-            
-            # Periodically retrain models
-            if self.should_retrain():
-                await self.model_trainer.retrain(
-                    data=self.outcome_db.get_recent(days=30),
-                    focus_areas=['compliance_optimization', 'workflow_efficiency']
-                )
-        
-        def should_retrain(self):
-            return (
-                self.outcome_db.count() % 1000 == 0 or
-                self.human_feedback.intervention_rate() > 0.1
-            )
-    ```
+    **What the Agent Learns:**
     
-    **Learning Dimensions:**
-    - Which compliance strategies succeed most often
-    - Optimal timing for property tokenization
-    - Notary selection based on response time and accuracy
-    - Gas optimization patterns
-    - Human intervention patterns to reduce future escalations
+    After every action, the agent records:
+    - **What worked well**: Which strategies led to fast, successful outcomes
+    - **What didn't work**: Where delays, errors, or human intervention occurred
+    - **Human feedback**: When humans override decisions, why did they do it?
+    - **Cost efficiency**: Which approaches minimize gas fees and processing time
+    - **User satisfaction**: How investors respond to different workflows
+    
+    **How Learning Happens:**
+    
+    The system maintains a comprehensive database of outcomes. Periodically, the AI models are retrained using this real-world data, incorporating:
+    
+    - **Success patterns**: "When properties in this region are tokenized during Q4, they typically take 10 days less because notaries are less busy"
+    - **Failure patterns**: "Transactions submitted on Fridays often require manual review on Mondays—better to schedule for Tuesday"
+    - **Human expertise**: "When the compliance team overrides the agent 3 times for similar situations, update the decision criteria"
+    
+    **Gradual Autonomy:**
+    
+    New agents start with limited authority and high human oversight. As they prove reliable over hundreds of transactions, they gradually gain more autonomy and trust. Agents that make poor decisions have their privileges reduced.
+    
+    **Real-World Example:**
+    
+    Initially, the agent might escalate any foreign ownership situation above 40% to human review. After processing 500 ZMT property transactions successfully, it learns the exact patterns of compliant transactions and only escalates truly ambiguous cases—reducing human review from 30% to 5% of transactions while maintaining 100% compliance.
+    
+    **Feedback Loop:**
+    
+    - Month 1: Agent handles routine tasks, humans review 40% of decisions
+    - Month 3: Agent learns patterns, humans review 15% of decisions  
+    - Month 6: Agent masters edge cases, humans review 5% of decisions
+    - Continuous: Agent keeps learning from every new situation
   </TabItem>
 </Tabs>
 
@@ -376,32 +294,33 @@ While agents operate autonomously, they remain under strict governance controls 
 
 **Multi-Tiered Safety Architecture:**
 
-```python
-class AgentSafetySystem:
-    def authorize_action(self, agent, action):
-        # Tier 1: Fully Autonomous (low risk)
-        if action.risk_level == 'low' and action.value < 1000:
-            return self.execute_immediately(action)
-        
-        # Tier 2: Time-Delayed (medium risk)
-        elif action.risk_level == 'medium':
-            self.schedule_with_delay(action, delay_hours=24)
-            self.notify_oversight_committee(action)
-            return "SCHEDULED"
-        
-        # Tier 3: Human Approval Required (high risk)
-        elif action.risk_level == 'high' or action.value > 100000:
-            approval = await self.request_human_approval(action)
-            if approval.approved:
-                return self.execute_with_audit(action)
-            else:
-                return "REJECTED"
-        
-        # Tier 4: DAO Governance (protocol changes)
-        elif action.type == 'protocol_modification':
-            proposal = self.create_dao_proposal(action)
-            return "PENDING_DAO_VOTE"
-```
+The system uses a four-tier approach to agent authorization based on risk and value:
+
+**Tier 1: Fully Autonomous (Low Risk)**
+- Small, routine transactions under $1,000
+- Standard compliance checks
+- Automated data updates
+- **Authorization**: Execute immediately without delays
+
+**Tier 2: Time-Delayed (Medium Risk)**
+- Medium-value transactions or unusual patterns
+- Non-standard compliance scenarios
+- **Authorization**: Schedule with 24-hour delay, notify oversight committee
+- **Purpose**: Gives humans time to review and veto if needed
+
+**Tier 3: Human Approval Required (High Risk)**
+- High-value transactions over $100,000
+- Complex legal situations
+- Disputed property actions
+- **Authorization**: Agent proposes action, human must explicitly approve
+- **Purpose**: Critical decisions always have human judgment
+
+**Tier 4: DAO Governance (Protocol Changes)**
+- Modifications to protocol rules
+- Changes to agent authorization levels
+- System-wide parameter updates
+- **Authorization**: Full DAO vote required
+- **Purpose**: Community controls fundamental protocol changes
 
 **Governance Controls:**
 - **Agent Authorization Registry**: DAO-managed whitelist of approved agent addresses
