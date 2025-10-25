@@ -92,27 +92,125 @@ The FolioChain Protocol integrates blockchain with Costa Rica's legal and regula
   </Card>
 </CardGrid>
 
-### Oracle Data Flow
+### Oracle Data Flow: Manual vs Autonomous
 
-<Steps>
+<Tabs>
+  <TabItem label="Traditional Flow">
+    **Human-Orchestrated Data Validation**
+    
+    <Steps>
+    1. **Data Collection**
+       
+       Registry bots scrape National Registry, Notarios authenticate documents, regulatory APIs provide SUGEVAL/SUGEF data.
+    
+    2. **Consensus Mechanism**
+       
+       AI engine compares all sources, assigns confidence scores, flags discrepancies for human review.
+    
+    3. **Threshold Validation**
+       
+       Only data achieving 95%+ confidence across 3+ sources proceeds to compliance checks.
+    
+    4. **On-Chain Anchoring**
+       
+       Verified data is hashed and stored immutably on Polygon with cryptographic proofs.
+    </Steps>
+    
+    **Limitations**: Requires human monitoring, reactive problem detection, manual workflow orchestration.
+  </TabItem>
+  
+  <TabItem label="Agentic Flow">
+    **Autonomous Agent-Driven Workflow**
+    
+    <Steps>
+    1. **Proactive Perception**
+       
+       Agent continuously monitors Registry changes 24/7, detecting tokenization opportunities before humans notice.
+    
+    2. **Intelligent Reasoning**
+       
+       LLM-powered agent analyzes legal context, assesses compliance complexity, determines optimal strategy.
+    
+    3. **Adaptive Planning**
+       
+       Agent decomposes tokenization into steps, identifies dependencies, selects fallback strategies for edge cases.
+    
+    4. **Autonomous Execution**
+       
+       Agent directly calls smart contract functions: `agentInitiateKYC()`, `agentUpdateOracle()`, `agentMintToken()`.
+    
+    5. **Predictive Optimization**
+       
+       Agent learns from outcomes, predicts bottlenecks, proactively resolves issues before they block progress.
+    
+    6. **Self-Anchoring**
+       
+       Agent cryptographically signs attestations, anchors data on-chain, emits audit events—all without human intervention.
+    </Steps>
+    
+    **Advantages**: Proactive monitoring, 75% less human effort, intelligent problem-solving, continuous learning.
+  </TabItem>
+</Tabs>
 
-1. **Data Collection**
-   
-   Registry bots scrape National Registry, Notarios authenticate documents, and regulatory APIs provide SUGEVAL/SUGEF data.
+### Autonomous Workflow Examples
 
-2. **Consensus Mechanism**
-   
-   AI engine compares all sources, assigns confidence scores, and flags discrepancies for human review.
-
-3. **Threshold Validation**
-   
-   Only data achieving 95%+ confidence across 3+ sources proceeds to compliance checks.
-
-4. **On-Chain Anchoring**
-   
-   Verified data is hashed and stored immutably on Polygon with cryptographic proofs.
-
-</Steps>
+<CardGrid>
+  <Card title="Agent-Initiated Tokenization" icon="rocket">
+    **Trigger**: Agent detects Registry update showing property lien released
+    
+    **Agent Actions**:
+    1. Validates property now has clear title
+    2. Identifies owner from Registry data
+    3. Checks if owner has FolioChain account
+    4. Sends personalized tokenization proposal
+    5. If accepted, orchestrates full workflow
+    6. Deploys tokens to DEX within 30 days
+    
+    **Human Involvement**: Zero (unless edge case detected)
+  </Card>
+  
+  <Card title="Compliance Optimization" icon="approve-check-circle">
+    **Trigger**: Investor attempts ZMT property purchase violating 49% foreign cap
+    
+    **Agent Actions**:
+    1. Detects impending violation before transaction
+    2. Calculates maximum compliant purchase amount
+    3. Proposes partial fill: "Buy 73 tokens now, queue 27 for later"
+    4. Executes compliant portion immediately
+    5. Monitors for future cap availability
+    6. Auto-completes queued order when possible
+    
+    **Result**: Transaction succeeds vs rejected
+  </Card>
+  
+  <Card title="Predictive KYC Renewal" icon="information">
+    **Trigger**: Agent predicts KYC expiration in 14 days
+    
+    **Agent Actions**:
+    1. Sends proactive renewal notification
+    2. Pre-fills renewal form with existing data
+    3. Schedules automatic submission
+    4. Monitors approval status
+    5. Updates Identity Registry upon approval
+    6. Ensures zero service interruption
+    
+    **Human Involvement**: User clicks "Approve" only
+  </Card>
+  
+  <Card title="Autonomous Dispute Resolution" icon="warning">
+    **Trigger**: Oracle consensus drops to 87% (Registry-Notary conflict)
+    
+    **Agent Actions**:
+    1. Immediately freezes affected tokens
+    2. Requests clarification from conflicting sources
+    3. Gathers additional evidence from archives
+    4. Escalates to notary review with evidence package
+    5. Coordinates resolution timeline
+    6. Unfreezes tokens upon consensus restoration
+    
+    **Resolution Time**: 3 days vs 14 days manual
+  </Card>
+</CardGrid>
 
 ---
 

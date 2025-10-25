@@ -414,12 +414,96 @@ event EmergencyPause(uint256 indexed tokenId, string reason, address indexed ini
 
 These events feed regulatory dashboards and provide court-admissible evidence for dispute resolution.
 
-## Law Encoded, Law Anticipated
+## 7. Agent-Callable Contract Design: Enabling Autonomy
 
 <Aside type="tip">
-Every line of FCP's on-chain logic is a covenant with Costa Rican law—not mere guidelines, but hard-coded legal requirements enforced at the moment of execution.
+**Smart Contracts Meet Autonomous Agents**: FolioChain's contracts expose specialized interfaces that allow authorized AI agents to call functions directly, enabling true autonomy while maintaining security and compliance.
+</Aside>
+
+Traditional smart contracts wait passively for human-initiated transactions. FolioChain's agent-callable design inverts this model: contracts become composable building blocks that autonomous agents orchestrate into intelligent workflows.
+
+### Agent Authorization & Safety
+
+```solidity
+contract AgentEnabledCompliance is CRModularCompliance {
+    bytes32 public constant AGENT_ROLE = keccak256("AGENT_ROLE");
+    
+    struct AgentProfile {
+        bool active;
+        uint256 dailyTxLimit;
+        uint256 dailyValueLimit;
+        uint256 successfulActions;
+    }
+    
+    mapping(address => AgentProfile) public agents;
+    
+    modifier onlyAuthorizedAgent() {
+        require(hasRole(AGENT_ROLE, msg.sender) && agents[msg.sender].active, "Not authorized agent");
+        _;
+    }
+    
+    // Agent can optimize compliance for edge cases
+    function agentOptimizeTransfer(
+        address _token,
+        address _from,
+        address _to,
+        uint256 _requestedAmount
+    ) external onlyAuthorizedAgent returns (uint256 maxCompliantAmount, string memory strategy) {
+        // Check ZMT compliance and propose alternative
+        if (isZMTProperty(_token) && isForeign(_to)) {
+            uint256 currentForeign = calculateForeignOwnership(_token);
+            uint256 maxAdditional = (MAX_FOREIGN_OWNERSHIP_ZMT * totalSupply(_token) / 10000) - currentForeign;
+            
+            if (_requestedAmount > maxAdditional) {
+                return (maxAdditional, "ZMT_CAP_PARTIAL_FILL");
+            }
+        }
+        
+        return (_requestedAmount, "FULLY_COMPLIANT");
+    }
+    
+    // Agent can add KYC claims autonomously
+    function agentAddKYCClaim(
+        address _user,
+        uint256 _topic,
+        bytes calldata _data,
+        bytes calldata _agentAttestation
+    ) external onlyAuthorizedAgent {
+        require(_verifyAgentAttestation(_agentAttestation, _user, _topic, _data), "Invalid attestation");
+        identityRegistry.addClaim(_user, _topic, _data, _agentAttestation);
+        emit AgentKYCAction(msg.sender, _user, _topic);
+    }
+}
+```
+
+### Event-Driven Agent Triggers
+
+Contracts emit specialized events that trigger autonomous agent workflows:
+
+```solidity
+// Agents listen and respond autonomously
+event ComplianceCheckFailed(address indexed token, address indexed user, string reason, uint256 requestedAmount);
+event KYCClaimExpiring(address indexed user, uint256 indexed topic, uint256 daysRemaining);
+event RegistryUpdateDetected(string indexed folioRealId, string updateType);
+event OracleConsensusLow(string indexed folioRealId, uint8 consensusScore, string[] conflictingSources);
+```
+
+**Agent Response Patterns:**
+- **ComplianceCheckFailed** → Agent calculates compliant alternative, proposes partial fill
+- **KYCClaimExpiring** → Agent sends proactive renewal notification, pre-fills forms
+- **RegistryUpdateDetected** → Agent triggers re-validation workflow automatically
+- **OracleConsensusLow** → Agent freezes tokens, escalates to notary review, coordinates resolution
+
+---
+
+## Law Encoded, Intelligence Unleashed
+
+<Aside type="tip">
+Every line of FCP's on-chain logic is a covenant with Costa Rican law—not mere guidelines, but hard-coded legal requirements. Now, with agentic architecture, these laws are not just enforced but intelligently optimized by autonomous agents.
 </Aside>
 
 In the crucible of Costa Rican real estate, where law, market, and technology converge, FolioChain Protocol's on-chain components transcend mere code. They represent the living logic of trust, transparency, and compliance—each contract an arbiter, each function a safeguard, each event a beacon in the audit trail.
 
-The deterministic certainty of smart contracts, combined with the adaptive intelligence of off-chain oracles, creates a system where the future of asset ownership is not only imagined but immutably inscribed, one block at a time. As Costa Rican law evolves and markets mature, these on-chain foundations provide the bedrock upon which inclusive, compliant, and transparent real estate tokenization can flourish.
+The deterministic certainty of smart contracts, **combined with the adaptive intelligence of autonomous AI agents**, creates a system where the future of asset ownership is not only imagined but immutably inscribed and intelligently orchestrated—one block, one agent action, one optimized workflow at a time. 
+
+As Costa Rican law evolves and markets mature, these agent-enabled on-chain foundations provide the bedrock upon which **truly smart, autonomous, and adaptive** real estate tokenization can flourish.
