@@ -1,11 +1,17 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import mdx from '@astrojs/mdx';
+import rehypeMermaid from 'rehype-mermaid';
 
 // https://astro.build/config  
 export default defineConfig({
 	site: 'https://elwizard33.github.io',
 	base: import.meta.env.PROD ? '/foliochain-docs' : '/',
+	markdown: {
+		rehypePlugins: [
+			[rehypeMermaid, { strategy: 'img-svg' }]
+		],
+	},
 	integrations: [
 		starlight({
 			title: 'FolioChain Protocol',

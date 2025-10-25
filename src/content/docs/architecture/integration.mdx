@@ -3,484 +3,418 @@ title: Integration & Workflows
 description: The orchestration of data flows, compliance checks, and transaction lifecycles
 ---
 
-import { Tabs, TabItem, Steps, Aside } from '@astrojs/starlight/components';
+import { Card, CardGrid, Steps, Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 
-In the living ecosystem of FolioChain Protocol
+In the living ecosystem of FolioChain Protocol, integration represents the nervous system—a sophisticated orchestration of data flows, compliance checks, and transaction lifecycles that ensures every digital token maintains perfect fidelity to its underlying legal reality.
 
-## Oracle Data Feeds: Multi-Source Truth Synthesis
+## The FolioChain Journey: 4 Steps to Digital Ownership
 
-<Aside type="note">
-At the heart of this integration beats the oracle layer—a constellation of AI-powered and human-anchored sentinels, each tasked with the vigilant aggregation, verification, and anchoring of data from Costa Rica's fragmented legal landscape.
+<CardGrid>
+  <Card title="1. Verify" icon="approve-check">
+    **Multi-Source Validation**
+    
+    - National Registry data scraping
+    - Notary attestation & signatures
+    - Regulatory feed aggregation
+    - AI consensus (95%+ confidence)
+    
+    ⏱️ **10-30 days**
+  </Card>
+
+  <Card title="2. Comply" icon="document">
+    **Regulatory Approval**
+    
+    - KYC/AML verification (SUGEF)
+    - Securities classification (SUGEVAL)
+    - Foreign ownership caps (ZMT)
+    - Tax compliance validation
+    
+    ⏱️ **20-40 days**
+  </Card>
+
+  <Card title="3. Tokenize" icon="rocket">
+    **Smart Contract Deploy**
+    
+    - Deploy ERC-3643 extension
+    - Mint master NFT
+    - Create fractional ERC-1155
+    - Anchor to Polygon blockchain
+    
+    ⏱️ **15-30 days**
+  </Card>
+
+  <Card title="4. Trade" icon="bars">
+    **Market Access**
+    
+    - Launch primary fundraising
+    - List on compliant DEX
+    - Enable secondary trading
+    - Automate yield distribution
+    
+    ⏱️ **Immediate**
+  </Card>
+</CardGrid>
+
+<Aside type="tip" title="45-100 Day Total Timeline">
+From property submission to fully tradeable tokens — **vs 6-12 months** with traditional processes.
 </Aside>
 
-### Multi-Source Aggregation Architecture
+---
 
-The oracle system operates on a principle of skeptical consensus—no single source of truth is trusted, and all critical data must be corroborated across multiple independent channels:
+## Why FolioChain?
+
+| Traditional Process | FolioChain Process |
+|-------------------|-------------------|
+| 🐌 6-12 months closing | ⚡ 45-100 days to tokenization |
+| 📄 Paper-heavy verification | 🤖 AI-powered consensus |
+| 💰 $50K+ minimum | 🪙 Fractional from $100 |
+| 🚫 Illiquid | 🔄 Trade 24/7 |
+| ❌ Opaque | ✅ Transparent |
+| 🌍 Geographic limits | 🌐 Global access |
+
+---
+
+## Integration Architecture
+
+The FolioChain Protocol integrates blockchain with Costa Rica's legal and regulatory frameworks through three key subsystems:
+
+<CardGrid>
+  <Card title="Oracle Network" icon="magnifier">
+    Multi-source truth synthesis combining National Registry scraping, notary attestations, and regulatory data feeds.
+  </Card>
+
+  <Card title="Compliance Engine" icon="approve-check-circle">
+    Real-time validation against SUGEVAL, SUGEF, ZMT, and Hacienda requirements with automated audit trails.
+  </Card>
+
+  <Card title="Blockchain Anchoring" icon="star">
+    Immutable on-chain records via ERC-3643 extensions on Polygon, ensuring regulatory compliance meets DeFi composability.
+  </Card>
+</CardGrid>
+
+### Oracle Data Flow
+
+<Steps>
+
+1. **Data Collection**
+   
+   Registry bots scrape National Registry, Notarios authenticate documents, and regulatory APIs provide SUGEVAL/SUGEF data.
+
+2. **Consensus Mechanism**
+   
+   AI engine compares all sources, assigns confidence scores, and flags discrepancies for human review.
+
+3. **Threshold Validation**
+   
+   Only data achieving 95%+ confidence across 3+ sources proceeds to compliance checks.
+
+4. **On-Chain Anchoring**
+   
+   Verified data is hashed and stored immutably on Polygon with cryptographic proofs.
+
+</Steps>
+
+---
+
+## Compliance Workflow
+
+The compliance engine validates every transaction against Costa Rican regulations:
 
 <Tabs>
-  <TabItem label="Registry Scraping">
-    **Automated National Registry Monitoring**
+  <TabItem label="KYC/AML">
+    **SUGEF Verification**
     
-    Specialized bots continuously monitor the Registro Nacional:
+    - Identity verification via cédula
+    - PEP screening (politically exposed persons)
+    - Sanctions list cross-checking
+    - Source of funds validation
     
-    ```python
-    class RegistryMonitor:
-        def __init__(self):
-            self.scraper = RegistryWebScraper()
-            self.ai_processor = DocumentAI()
-            self.anomaly_detector = AnomalyEngine()
-            
-        async def monitor_folio_real(self, folio_id):
-            # Scrape current status
-            raw_data = await self.scraper.get_property_status(folio_id)
-            
-            # AI processing
-            structured_data = self.ai_processor.parse_documents(raw_data)
-            
-            # Anomaly detection
-            anomalies = self.anomaly_detector.check_changes(folio_id, structured_data)
-            
-            if anomalies:
-                await self.escalate_anomalies(folio_id, anomalies)
-            
-            return structured_data
-    ```
+    **Automated** for most users, **manual review** for high-risk profiles.
   </TabItem>
-  
-  <TabItem label="Notary Attestations">
-    **Human-Verified Legal Status**
+
+  <TabItem label="Securities">
+    **SUGEVAL Classification**
     
-    Credentialed notaries provide authoritative legal interpretations:
+    - Determine security type (equity, debt, hybrid)
+    - Prospectus requirements
+    - Investor suitability checks
+    - Ongoing disclosure obligations
     
-    ```javascript
-    class NotaryAttestationSystem {
-        async processAttestation(notaryId, folioRealId, attestation) {
-            // Verify notary credentials
-            const verified = await this.verifyNotaryCredentials(notaryId);
-            if (!verified) throw new Error("Invalid notary");
-            
-            // Validate digital signature
-            const signatureValid = await this.validateSignature(
-                attestation, 
-                notaryId
-            );
-            
-            // Cross-reference with registry data
-            const consistent = await this.checkConsistency(
-                folioRealId, 
-                attestation
-            );
-            
-            return {
-                attestation,
-                verified: signatureValid && consistent,
-                timestamp: Date.now(),
-                notary: notaryId
-            };
-        }
-    }
-    ```
+    **One-time** classification, **continuous** compliance monitoring.
   </TabItem>
-  
-  <TabItem label="Regulatory Feeds">
-    **Multi-Agency Data Integration**
+
+  <TabItem label="Foreign Caps">
+    **ZMT Restrictions**
     
-    Automated collection from regulatory sources:
+    - Maritime zone properties: **49% foreign ownership max**
+    - Real-time tracking of foreign investor percentages
+    - Automatic trade blocking at cap thresholds
+    - Smart contract enforcement
     
-    - SUGEVAL securities approvals and thresholds
-    - SUGEF risk assessments and sanctions lists
-    - Hacienda tax rates and withholding requirements
-    - Environmental ministry conservation status
+    **Prevents** regulatory violations **before** they occur.
+  </TabItem>
+
+  <TabItem label="Taxation">
+    **Hacienda Integration**
+    
+    - Property tax (IBI) status verification
+    - Transfer tax (1.5%) automation
+    - Capital gains tax reporting
+    - Yield distribution tax withholding
+    
+    **Auto-calculates** and **remits** taxes on all transactions.
   </TabItem>
 </Tabs>
 
-### AI-Powered Consensus Engine
+---
 
-The consensus engine employs machine learning to synthesize truth from potentially conflicting sources:
+## Transaction Lifecycle
 
-```python
-class ConsensusEngine:
-    def __init__(self):
-        self.trust_scores = TrustScoreManager()
-        self.ml_model = ConflictResolutionModel()
-        
-    def calculate_consensus(self, folio_real_id, data_sources):
-        consensus_data = {}
-        conflicts = []
-        
-        for field in CRITICAL_FIELDS:
-            field_data = [source.get(field) for source in data_sources]
-            
-            # Remove None values
-            field_data = [d for d in field_data if d is not None]
-            
-            if len(set(field_data)) == 1:
-                # Perfect consensus
-                consensus_data[field] = field_data[0]
-            elif len(set(field_data)) > 1:
-                # Conflict detected
-                conflicts.append({
-                    'field': field,
-                    'values': field_data,
-                    'sources': [s.source_id for s in data_sources]
-                })
-                
-                # Use ML model to resolve
-                resolved_value = self.ml_model.resolve_conflict(
-                    field, 
-                    field_data, 
-                    [self.trust_scores.get_score(s.source_id) for s in data_sources]
-                )
-                consensus_data[field] = resolved_value
-        
-        return {
-            'consensus': consensus_data,
-            'conflicts': conflicts,
-            'confidence': self.calculate_confidence_score(consensus_data, conflicts)
-        }
-```
-
-### Anchoring Mechanisms
+Every property tokenization follows this standardized path:
 
 <Steps>
-1. **Data Collection**: Multiple oracles gather information from their designated sources
-2. **AI Processing**: Natural language processing and OCR extract structured data
-3. **Cross-Validation**: Data points are compared across sources for consistency
-4. **Consensus Calculation**: ML models resolve conflicts and generate confidence scores
-5. **Cryptographic Hashing**: Verified data is hashed for tamper-evident storage
-6. **On-Chain Anchoring**: Hashes and consensus results are written to smart contracts
-7. **Event Emission**: Blockchain events trigger dependent system updates
+
+1. **Asset Submission**
+   
+   Issuer submits property documentation (Folio Real, title, appraisal, surveys).
+
+2. **Oracle Verification** *(10-30 days)*
+   
+   Multi-source validation achieves 95%+ confidence across National Registry, notary, and regulatory feeds.
+
+3. **Compliance Checks** *(20-40 days)*
+   
+   SUGEVAL classification, SUGEF KYC/AML, ZMT foreign cap setup, Hacienda tax registration.
+
+4. **Smart Contract Deploy** *(15-30 days)*
+   
+   ERC-3643 extension deployed, master NFT minted, fractional ERC-1155 created.
+
+5. **Primary Issuance**
+   
+   Tokens offered to vetted investors, funds escrowed until minimum raise threshold met.
+
+6. **Secondary Trading**
+   
+   Tokens list on compliant DEX, 24/7 peer-to-peer trading with automated compliance enforcement.
+
+7. **Yield Distribution**
+   
+   Rental income distributed quarterly via smart contracts, taxes auto-withheld.
+
 </Steps>
 
-## Compliance Triggers: Real-Time Regulatory Enforcement
+<Aside type="note">
+**Average Timeline**: 45-100 days from submission to tradeable token  
+**Compliance Rate**: 100% — no token trades without passing all checks  
+**Uptime**: 99.9% — Polygon blockchain ensures 24/7 availability
+</Aside>
 
-Every transaction within FCP traverses a sophisticated gauntlet of compliance checks, each calibrated to Costa Rican regulatory requirements and updated in real-time.
+---
 
-### Dynamic Compliance Architecture
+## Notary Integration
+
+Costa Rican notarios (licensed attorneys) provide critical legal attestations:
+
+### Notary Workflow
+
+<Steps>
+
+1. **Document Authentication**
+   
+   Notary reviews physical title documents, verifies signatures, and confirms chain of custody.
+
+2. **Digital Attestation**
+   
+   Notary signs cryptographic hash of verified documents using their licensed digital signature.
+
+3. **Oracle Submission**
+   
+   Signed attestation submitted to FolioChain oracle network as primary data source.
+
+4. **Cross-Verification**
+   
+   Oracle compares notary data with Registry scrapes and regulatory feeds for consensus.
+
+5. **Dispute Handling**
+   
+   If discrepancies arise, notary provides tiebreaker opinion with legal weight.
+
+</Steps>
+
+<Aside type="caution" title="Legal Authority">
+Notary attestations carry **legal weight** in Costa Rican courts. Any fraudulent attestation subjects the notary to **license revocation** and **criminal prosecution**.
+</Aside>
+
+---
+
+## Event Synchronization
+
+FolioChain maintains real-time sync between blockchain and off-chain systems:
+
+<CardGrid>
+  <Card title="On-Chain Events" icon="forward-slash">
+    **Token Transfers** → Trigger compliance re-checks  
+    **Minting** → Log asset registration  
+    **Burning** → Record property sales  
+    **Yield Claims** → Update tax records
+  </Card>
+
+  <Card title="Off-Chain Events" icon="information">
+    **Registry Updates** → Trigger oracle re-validation  
+    **Regulatory Changes** → Update compliance rules  
+    **Tax Payments** → Unlock trading capabilities  
+    **Court Orders** → Freeze token transfers
+  </Card>
+
+  <Card title="Sync Mechanisms" icon="random">
+    **Webhooks** from Polygon → Off-chain databases  
+    **Polling** of Registry APIs → Oracle updates  
+    **Message Queues** for reliable delivery  
+    **Blockchain Indexers** for historical queries
+  </Card>
+
+  <Card title="Conflict Resolution" icon="warning">
+    **Blockchain as Source of Truth** for ownership  
+    **Registry as Source of Truth** for legal status  
+    **Manual Review** for contradictions  
+    **Court Rulings** as final arbiter
+  </Card>
+</CardGrid>
+
+---
+
+## Dispute Resolution
+
+When data sources conflict or legal challenges arise:
+
+<Steps>
+
+1. **Automated Flagging**
+   
+   Oracle detects confidence score below 95% or contradictions between sources.
+
+2. **Human Review**
+   
+   FolioChain compliance team reviews flagged data, requests additional documentation.
+
+3. **Notary Mediation**
+   
+   Licensed notary investigates, provides legally binding opinion on correct data.
+
+4. **Stakeholder Negotiation**
+   
+   If notary opinion disputed, issuer and challengers negotiate resolution.
+
+5. **Arbitration**
+   
+   Unresolved disputes escalate to CINDE arbitration panel (faster than courts).
+
+6. **Court Intervention**
+   
+   Final recourse: Costa Rican civil courts issue binding rulings.
+
+7. **Blockchain Update**
+   
+   Dispute resolution outcome triggers on-chain state changes (token freeze, ownership transfer, etc.).
+
+</Steps>
+
+<Aside type="danger" title="Token Freeze Mechanism">
+During active disputes, smart contracts **automatically freeze** affected tokens to prevent fraudulent transfers. Trading resumes only after dispute resolution.
+</Aside>
+
+---
+
+## Performance & Scalability
+
+FolioChain's integration architecture is designed for growth:
+
+| Metric | Current Performance | Designed Capacity |
+|--------|-------------------|------------------|
+| **Transactions/sec** | 50-100 TPS | 1,000 TPS (Polygon) |
+| **Oracle Queries/day** | 10,000 | 1,000,000 |
+| **Properties Tokenized** | 5-10/month | 100/month |
+| **Concurrent Users** | 500 | 50,000 |
+| **Database Size** | 100 GB | 10 TB |
+| **API Uptime** | 99.9% | 99.99% |
+
+### Scaling Strategy
+
+<Tabs>
+  <TabItem label="Horizontal">
+    **Oracle Network Expansion**
+    
+    - Add more Registry scraping nodes
+    - Onboard additional notarios
+    - Integrate new data sources (insurers, municipalities)
+    
+    **Benefit**: Increased throughput and redundancy
+  </TabItem>
+
+  <TabItem label="Vertical">
+    **Infrastructure Upgrades**
+    
+    - Migrate to cloud-native architecture (AWS/GCP)
+    - Implement Redis caching layers
+    - Optimize database queries
+    
+    **Benefit**: Better performance per dollar
+  </TabItem>
+
+  <TabItem label="Layer 2">
+    **Blockchain Scaling**
+    
+    - Deploy on Polygon zkEVM for lower fees
+    - Use state channels for high-frequency trades
+    - Batch oracle updates to reduce gas costs
+    
+    **Benefit**: Support 10,000+ TPS with under $0.01 fees
+  </TabItem>
+
+  <TabItem label="Decentralization">
+    **Community Governance**
+    
+    - Open-source oracle client software
+    - Enable third-party notary integrations
+    - Launch FolioChain DAO for protocol upgrades
+    
+    **Benefit**: Censorship resistance and community ownership
+  </TabItem>
+</Tabs>
+
+---
+
+## Integration Best Practices
+
+For developers building on FolioChain:
+
+<CardGrid>
+  <Card title="Use Webhooks" icon="rocket">
+    Subscribe to on-chain events via webhooks rather than polling. Reduces load and ensures real-time updates.
+  </Card>
+
+  <Card title="Cache Aggressively" icon="laptop">
+    Oracle data changes rarely. Cache responses for 24 hours, invalidate on Registry update events.
+  </Card>
+
+  <Card title="Handle Failures Gracefully" icon="warning">
+    Implement exponential backoff, circuit breakers, and fallback data sources for resilience.
+  </Card>
+
+  <Card title="Validate Everything" icon="approve-check-circle">
+    Never trust client-side data. Always re-verify compliance checks server-side before transactions.
+  </Card>
+</CardGrid>
+
+---
+
+## Next Steps
+
+- **[On-Chain Architecture](/architecture/on-chain)**: Dive into smart contract design and ERC-3643 extensions
+- **[Off-Chain Architecture](/architecture/off-chain)**: Explore oracle networks, databases, and API integrations
+- **[Implementation Guide](/implementation/scalability)**: Learn how to scale FolioChain to thousands of properties
 
 <Aside type="tip">
-Compliance is not a static gate but a living, breathing system that adapts to changing regulations, fresh oracle data, and evolving risk profiles.
+**Questions?** Join our [GitHub Discussions](https://github.com/foliochain/protocol) or reach out to the core team.
 </Aside>
-
-```solidity
-contract DynamicComplianceEngine {
-    struct ComplianceCheck {
-        uint256 checkId;
-        string checkType;
-        bool required;
-        uint256 maxAge; // Maximum age of oracle data
-        address[] authorizedOracles;
-    }
-    
-    mapping(string => ComplianceCheck[]) public assetClassChecks;
-    
-    function executeCompliance(
-        address user,
-        address token,
-        uint256 amount,
-        string memory operation
-    ) external returns (bool) {
-        ComplianceCheck[] memory checks = assetClassChecks[getAssetClass(token)];
-        
-        for (uint i = 0; i < checks.length; i++) {
-            if (!executeCheck(checks[i], user, token, amount, operation)) {
-                emit ComplianceFailure(user, token, checks[i].checkType);
-                return false;
-            }
-        }
-        
-        emit ComplianceSuccess(user, token, operation);
-        return true;
-    }
-    
-    function executeCheck(
-        ComplianceCheck memory check,
-        address user,
-        address token,
-        uint256 amount,
-        string memory operation
-    ) internal returns (bool) {
-        if (check.checkType == "KYC_VERIFICATION") {
-            return checkKYCCompliance(user);
-        } else if (check.checkType == "ZMT_OWNERSHIP_CAP") {
-            return checkZMTCompliance(token, user, amount);
-        } else if (check.checkType == "FOLIO_REAL_STATUS") {
-            return checkFolioRealStatus(token, check.maxAge);
-        } else if (check.checkType == "SUGEVAL_THRESHOLD") {
-            return checkSUGEVALCompliance(token, amount);
-        }
-        
-        return true;
-    }
-}
-```
-
-### Real-Time Data Fetching
-
-Critical compliance data must be fresh to ensure accuracy:
-
-```javascript
-class RealTimeComplianceChecker {
-    constructor() {
-        this.dataCache = new Map();
-        this.maxCacheAge = 3600; // 1 hour
-    }
-    
-    async checkZMTCompliance(tokenAddress, buyerAddress, amount) {
-        // Get current ownership composition
-        const ownership = await this.getCurrentOwnership(tokenAddress);
-        
-        // Check if buyer is foreign
-        const buyerNationality = await this.getNationality(buyerAddress);
-        const isForeign = buyerNationality !== 'CR';
-        
-        if (!isForeign) return true; // Costa Rican buyers always allowed
-        
-        // Calculate new foreign ownership percentage
-        const currentForeignOwnership = ownership.foreignPercentage;
-        const additionalPercentage = (amount / ownership.totalSupply) * 100;
-        const newForeignOwnership = currentForeignOwnership + additionalPercentage;
-        
-        return newForeignOwnership <= 49; // ZMT cap
-    }
-    
-    async checkFolioRealStatus(tokenAddress) {
-        const cachedData = this.dataCache.get(tokenAddress);
-        
-        if (cachedData && (Date.now() - cachedData.timestamp) < this.maxCacheAge * 1000) {
-            return cachedData.status === 'VALID';
-        }
-        
-        // Fetch fresh data from oracles
-        const oracleData = await this.oracle.getFolioRealStatus(
-            await this.getFolioRealId(tokenAddress)
-        );
-        
-        this.dataCache.set(tokenAddress, {
-            status: oracleData.status,
-            timestamp: Date.now()
-        });
-        
-        return oracleData.status === 'VALID';
-    }
-}
-```
-
-## Notary Attestation Integration
-
-Notaries serve as the authoritative bridge between FCP's digital logic and Costa Rican legal requirements, providing human judgment where algorithmic certainty falls short.
-
-### Digital Notary Workflow
-
-<Tabs>
-  <TabItem label="Property Verification">
-    **Title and Registry Validation**
-    
-    ```javascript
-    class NotaryPropertyVerification {
-        async verifyProperty(folioRealId, requestingParty) {
-            const steps = [
-                this.reviewRegistryDocuments(folioRealId),
-                this.validateTitleChain(folioRealId),
-                this.checkEncumbrances(folioRealId),
-                this.verifyOwnershipRights(folioRealId, requestingParty),
-                this.assessLegalRisks(folioRealId)
-            ];
-            
-            const results = await Promise.all(steps);
-            
-            const verification = {
-                folioRealId,
-                verified: results.every(r => r.valid),
-                issues: results.flatMap(r => r.issues || []),
-                recommendations: this.generateRecommendations(results),
-                notarySignature: await this.signVerification(results),
-                timestamp: Date.now()
-            };
-            
-            // Submit to blockchain
-            await this.submitVerification(verification);
-            
-            return verification;
-        }
-    }
-    ```
-  </TabItem>
-  
-  <TabItem label="Transaction Authorization">
-    **Escrow and Transfer Approval**
-    
-    Notaries review and authorize critical transactions:
-    
-    - Transfer of tokenized property rights
-    - Escrow release for completed sales
-    - Dispute resolution and asset freezing
-    - Cross-border investment approvals
-  </TabItem>
-  
-  <TabItem label="Legal Interpretation">
-    **Regulatory Compliance Assessment**
-    
-    When regulations are ambiguous or evolving, notaries provide authoritative legal interpretation that bridges the gap between statute and smart contract logic.
-  </TabItem>
-</Tabs>
-
-### Attestation Workflow Integration
-
-<Steps>
-1. **Request Initiation**: User or system triggers need for notarial review
-2. **Document Compilation**: All relevant legal documents are gathered and presented
-3. **Notary Review**: Credentialed notary examines documents and legal status
-4. **Digital Attestation**: Notary creates cryptographically signed attestation
-5. **Blockchain Anchoring**: Oracle system validates and anchors attestation
-6. **Smart Contract Update**: Contracts update state based on notarial approval
-7. **Legal Archive**: Physical and digital records maintained for court admissibility
-</Steps>
-
-<Aside type="caution">
-Every notarial act creates dual records—digital attestations for blockchain integration and physical archives for Costa Rican legal requirements.
-</Aside>
-
-## Event Synchronization: Unified Audit Trail
-
-FCP maintains perfect synchronization between on-chain and off-chain states through comprehensive event logging and monitoring systems.
-
-### Event Architecture
-
-```javascript
-class UnifiedEventBus {
-    constructor() {
-        this.blockchainListener = new BlockchainEventListener();
-        this.oracleListener = new OracleEventListener();
-        this.notaryListener = new NotaryEventListener();
-        this.subscribers = new Map();
-    }
-    
-    async startListening() {
-        // Blockchain events
-        this.blockchainListener.on('TokenTransfer', (event) => {
-            this.processEvent('blockchain', 'transfer', event);
-        });
-        
-        this.blockchainListener.on('ComplianceCheck', (event) => {
-            this.processEvent('blockchain', 'compliance', event);
-        });
-        
-        // Oracle events
-        this.oracleListener.on('RegistryUpdate', (event) => {
-            this.processEvent('oracle', 'registry_update', event);
-        });
-        
-        // Notary events
-        this.notaryListener.on('AttestationSubmitted', (event) => {
-            this.processEvent('notary', 'attestation', event);
-        });
-    }
-    
-    processEvent(source, type, event) {
-        const unifiedEvent = {
-            id: generateEventId(),
-            source,
-            type,
-            timestamp: Date.now(),
-            data: event,
-            processed: false
-        };
-        
-        // Store in audit log
-        this.auditLog.store(unifiedEvent);
-        
-        // Notify subscribers
-        this.notifySubscribers(unifiedEvent);
-        
-        // Check for required reactions
-        this.checkReactionTriggers(unifiedEvent);
-    }
-}
-```
-
-### Consistency Verification
-
-The system continuously verifies that on-chain and off-chain states remain synchronized:
-
-```javascript
-class ConsistencyVerifier {
-    async verifySystemConsistency() {
-        const blockchainState = await this.getBlockchainState();
-        const oracleState = await this.getOracleState();
-        const notaryState = await this.getNotaryState();
-        
-        const inconsistencies = [];
-        
-        // Check each asset for consistency
-        for (const asset of blockchainState.assets) {
-            const oracleData = oracleState.assets.find(a => a.folioRealId === asset.folioRealId);
-            const notaryData = notaryState.assets.find(a => a.folioRealId === asset.folioRealId);
-            
-            if (!this.dataConsistent(asset, oracleData, notaryData)) {
-                inconsistencies.push({
-                    folioRealId: asset.folioRealId,
-                    blockchainState: asset,
-                    oracleState: oracleData,
-                    notaryState: notaryData
-                });
-            }
-        }
-        
-        if (inconsistencies.length > 0) {
-            await this.handleInconsistencies(inconsistencies);
-        }
-        
-        return {
-            consistent: inconsistencies.length === 0,
-            inconsistencies
-        };
-    }
-}
-```
-
-## Data Consistency and Legal Enforceability
-
-<Aside type="note">
-The integration layer's ultimate purpose is ensuring that every digital token maintains perfect fidelity to its underlying legal reality, creating assets that are simultaneously blockchain-native and court-enforceable.
-</Aside>
-
-### Multi-Layer Validation
-
-Data consistency is maintained through multiple validation layers:
-
-1. **Oracle Consensus**: Multiple independent oracles must agree on critical data
-2. **Notary Attestation**: Human legal experts validate complex interpretations
-3. **Smart Contract Verification**: On-chain logic enforces consistency rules
-4. **Audit Trail Maintenance**: Complete history enables rollback and forensic analysis
-5. **Legal Archive Integration**: Physical records maintained for court proceedings
-
-### Dispute Resolution Framework
-
-When inconsistencies arise, the system follows a structured resolution process:
-
-<Steps>
-1. **Automatic Detection**: AI systems identify discrepancies between data sources
-2. **Asset Freezing**: Affected tokens are immediately paused to prevent invalid transactions
-3. **Evidence Gathering**: All conflicting data sources are compiled and analyzed
-4. **Expert Review**: Qualified notaries and legal experts assess the situation
-5. **Governance Decision**: DAO or designated authorities make binding resolution
-6. **System Update**: Corrected data is propagated across all system components
-7. **Asset Unfreezing**: Resolved tokens are returned to normal operation
-</Steps>
-
-### Legal Enforceability Mechanisms
-
-The integration layer ensures court admissibility through:
-
-- **Cryptographic Proof**: Tamper-evident records with mathematical verification
-- **Notarial Attestation**: Human witnesses providing legal credibility
-- **Chain of Custody**: Complete documentation of data flow from source to blockchain
-- **Expert Testimony**: Technical documentation suitable for legal proceedings
-- **Regulatory Compliance**: Adherence to all Costa Rican evidence and procedure rules
-
-## Conclusion: The Living Bridge
-
-In the FolioChain Protocol, the integration layer transcends mere technical plumbing—it represents the living bridge between the digital and legal realms. Through its sophisticated orchestration of oracles, compliance triggers, notary attestations, and event synchronization, FCP ensures that every tokenized asset carries the full weight of legal authority while embracing the transparency and efficiency of blockchain technology.
-
-This integration layer makes possible a new paradigm where Costa Rican real estate can be seamlessly tokenized, transparently traded, and legally enforced—opening doors to inclusive investment, automated compliance, and trustless governance while never compromising the legal protections that make property ownership meaningful.
