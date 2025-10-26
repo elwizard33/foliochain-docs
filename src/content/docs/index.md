@@ -11,18 +11,18 @@ Costa Rica's premier platform for tokenizing real-world assets with compliance-f
 
 Explore the documentation:
 
-- **[Executive Summary](/overview/executive-summary/)** - Vision and market opportunity
-- **[Introduction](/overview/introduction/)** - Global RWA context
-- **[Protocol Objectives](/overview/objectives/)** - Seven pillars of FolioChain
+- **[Executive Summary](./overview/executive-summary/)** - Vision and market opportunity
+- **[Introduction](./overview/introduction/)** - Global RWA context
+- **[Protocol Objectives](./overview/objectives/)** - Seven pillars of FolioChain
 
 ## Architecture
 
 Learn about the technical design:
 
-- **[Technical Overview](/architecture/overview/)** - System design philosophy
-- **[On-Chain Components](/architecture/on-chain/)** - Smart contracts
-- **[Off-Chain Components](/architecture/off-chain/)** - AI oracles
-- **[Integration Layers](/architecture/integration/)** - Data flow orchestration
+- **[Technical Overview](./architecture/overview/)** - System design philosophy
+- **[On-Chain Components](./architecture/on-chain/)** - Smart contracts
+- **[Off-Chain Components](./architecture/off-chain/)** - AI oracles
+- **[Integration Layers](./architecture/integration/)** - Data flow orchestration
 
 ## Key Features
 
